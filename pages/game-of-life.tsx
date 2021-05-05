@@ -2,7 +2,7 @@ import { PageLayout } from "../components/PageLayout";
 import { Cell2d, GridWorld2d, State2d } from "../libs/grid-world2d";
 import { Grid2dAutomata } from "../components/Grid2dAutomata";
 import { useAnimatedWorld } from "../libs/use-animated-world";
-import { AnimationControls } from "../components/animation-controls";
+import { AnimationControls } from "../components/AnimationControls";
 
 function gameOfLifeRule(world: GridWorld2d, [x, y]: Cell2d): State2d {
   // prettier-ignore
@@ -35,6 +35,7 @@ export default function GameOfLife() {
     world,
     running,
     setRunning,
+    handleStep,
     handleReset,
     handleClear,
   ] = useAnimatedWorld(100, 100, randomizeWorld, gameOfLifeRule, 10);
@@ -43,6 +44,7 @@ export default function GameOfLife() {
       <AnimationControls
         setRunning={setRunning}
         running={running}
+        onStep={handleStep}
         onReset={handleReset}
         onClear={handleClear}
       />

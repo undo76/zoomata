@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { Cell2d, GridWorld2d, State2d } from "../libs/grid-world2d";
 import { Grid2dAutomata } from "../components/Grid2dAutomata";
 import { useAnimatedWorld } from "../libs/use-animated-world";
-import { AnimationControls } from "../components/animation-controls";
+import { AnimationControls } from "../components/AnimationControls";
 
 function selfReproducingRule(world: GridWorld2d, [x, y]: Cell2d): State2d {
   // prettier-ignore
@@ -37,6 +37,7 @@ export default function SelfReproducing() {
     world,
     running,
     setRunning,
+    handleStep,
     handleReset,
     handleClear,
   ] = useAnimatedWorld(100, 100, initFn, selfReproducingRule, 10);
@@ -45,6 +46,7 @@ export default function SelfReproducing() {
       <AnimationControls
         setRunning={setRunning}
         running={running}
+        onStep={handleStep}
         onReset={handleReset}
         onClear={handleClear}
       />

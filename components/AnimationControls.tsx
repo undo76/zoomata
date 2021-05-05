@@ -3,6 +3,7 @@ import {
   PlayIcon,
   RefreshIcon,
   TrashIcon,
+  ArrowRightIcon,
 } from "@heroicons/react/outline";
 import React from "react";
 import { Button } from "./Button";
@@ -10,6 +11,7 @@ import { Button } from "./Button";
 interface AnimationControlsProps {
   setRunning: (running: boolean) => void;
   running: boolean;
+  onStep: () => void;
   onReset: () => void;
   onClear: () => void;
 }
@@ -17,6 +19,7 @@ interface AnimationControlsProps {
 export const AnimationControls: React.FC<AnimationControlsProps> = ({
   setRunning,
   running,
+  onStep,
   onReset,
   onClear,
 }) => {
@@ -33,6 +36,13 @@ export const AnimationControls: React.FC<AnimationControlsProps> = ({
 
       {!running && (
         <>
+          <Button onClick={onStep}>
+            <ArrowRightIcon
+              className="-ml-0.5 mr-2 h-4 w-4"
+              aria-hidden="true"
+            />
+            Step
+          </Button>
           <Button onClick={onReset}>
             <RefreshIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />
             Reset

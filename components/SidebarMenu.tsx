@@ -86,27 +86,28 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
                 </div>
                 <nav className="mt-5 px-2 space-y-1">
                   {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                      )}
-                    >
-                      <item.icon
+                    <Link key={item.name} href={item.href}>
+                      <a
+                        href={item.href}
                         className={classNames(
                           item.current
-                            ? "text-gray-300"
-                            : "text-gray-400 group-hover:text-gray-300",
-                          "mr-4 h-6 w-6"
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "group flex items-center px-2 py-2 text-base font-medium rounded-md"
                         )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
+                      >
+                        <item.icon
+                          className={classNames(
+                            item.current
+                              ? "text-gray-300"
+                              : "text-gray-400 group-hover:text-gray-300",
+                            "mr-4 h-6 w-6"
+                          )}
+                          aria-hidden="true"
+                        />
+                        {item.name}
+                      </a>
+                    </Link>
                   ))}
                 </nav>
               </div>
@@ -134,9 +135,8 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
               </div>
               <nav className="mt-5 flex-1 px-2 bg-gray-800 space-y-1">
                 {navigation.map((item) => (
-                  <Link href={item.href}>
+                  <Link key={item.name} href={item.href}>
                     <a
-                      key={item.name}
                       href={item.href}
                       className={classNames(
                         item.current
