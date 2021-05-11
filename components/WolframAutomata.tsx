@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo } from "react";
 import { ColorMap, GridCanvas } from "./GridCanvas";
-import { Cell2d, GridWorld2d, Rule2d } from "../libs/grid-world2d";
+import { Cell2d, GridWorld2d, Rule2d } from "../libs/grid-world-2d";
 
 export interface WolframAutomataProps {
   rule: number;
   width: number;
   steps: number;
+  editable?: boolean;
   colorMap?: ColorMap;
 }
 
@@ -13,13 +14,10 @@ export const WolframAutomata: React.FC<WolframAutomataProps> = ({
   rule,
   width,
   steps,
+  editable = false,
   colorMap = ["#f1e5c3", "rgb(31, 41, 55)"],
 }) => {
-  let world = useMemo(() => computeSteps(rule, width, steps), [
-    rule,
-    width,
-    steps,
-  ]);
+  const world = computeSteps(rule, width, steps);
   const fillStyleFn = useCallback(
     ([x, y]) => colorMap[world.getCellState([x, y])],
     [world, colorMap]
@@ -28,28 +26,25 @@ export const WolframAutomata: React.FC<WolframAutomataProps> = ({
     <GridCanvas
       cellWidth={Math.round(1000 / width)}
       cellHeight={Math.round(1000 / width)}
+      padding={1}
       cols={width}
       rows={steps}
+      editable={editable}
       fillStyleFn={fillStyleFn}
     />
   );
 };
 
 function computeSteps(rule: number, width: number, steps: number): GridWorld2d {
-  // This is an optimization to prevent creating a new grid every step.
-  // It works because in a 1-D automata each row depends only of the previous row so we don't need
-  // to use a copy of the whole previous world.
-  // TODO: A better alternative would be to create a step-aware GridWorld1d.
-  console.time("computeSteps");
-  let world = new GridWorld2d(width, steps, wolframRule(rule));
-  world.setCellState([Math.floor(width / 2), 0], 1);
-  for (let y = 0; y < steps; y++) {
-    for (let x = 0; x < width; x++) {
-      world.setCellState([x, y], world.rule(world, [x, y]));
+  const world = new GridWorld2d(width, steps, undefined, wolframRule(rule));
+  return world.mutate((draft) => {
+    draft.setCellState([Math.floor(width / 2), 0], 1);
+    for (let y = 0; y < steps; y++) {
+      for (let x = 0; x < width; x++) {
+        draft.setCellState([x, y], draft.rule(draft, [x, y]));
+      }
     }
-  }
-  console.timeEnd("computeSteps");
-  return world;
+  });
 }
 
 function wolframRule(ruleNumber: number): Rule2d {

@@ -1,51 +1,40 @@
-import { Cell2d, GridWorld2d, State2d } from "./grid-world2d";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
-export function useAnimatedWorld(
-  width: number,
-  height: number,
-  initFn: (world: GridWorld2d) => GridWorld2d,
-  rule: (world: GridWorld2d, [x, y]: Cell2d) => State2d,
+export function useAnimated(
+  onStep: () => void,
   delay: number,
   initialRunning: boolean = true
-): [
-  GridWorld2d,
-  boolean,
-  (b: boolean) => void,
-  () => void,
-  () => void,
-  () => void
-] {
-  const [world, setWorld] = useState<GridWorld2d>(
-    initFn(new GridWorld2d(width, height, rule))
-  );
+): [boolean, (r: boolean) => void] {
   const [running, setRunning] = useState(initialRunning);
   const timeoutId = useRef<NodeJS.Timeout>();
 
-  const handleStep = useCallback(() => {
-    clearTimeout(timeoutId.current!);
-    setWorld(world.next());
-  }, [world]);
-
-  const handleReset = useCallback(() => {
-    clearTimeout(timeoutId.current!);
-    setWorld(initFn(new GridWorld2d(width, height, rule)));
-  }, [width, height, initFn, rule]);
-
-  const handleClear = useCallback(() => {
-    clearTimeout(timeoutId.current!);
-    setWorld(new GridWorld2d(width, height, rule));
-  }, [width, height, initFn, rule]);
-
-  useEffect(handleReset, [handleReset]);
   useEffect(() => {
     if (running) {
-      timeoutId.current = setTimeout(() => setWorld(world.next()), delay);
-      return () => clearTimeout(timeoutId.current!);
-    } else {
-      clearTimeout(timeoutId.current!);
+      timeoutId.current = setInterval(onStep, delay);
     }
-  }, [world, setWorld, delay, running]);
+    return () => clearTimeout(timeoutId.current!);
+  }, [onStep, delay, running]);
 
-  return [world, running, setRunning, handleStep, handleReset, handleClear];
+  return [running, setRunning];
+}
+
+export function useAnimatedState<S extends { next: () => S }>(
+  initialState: S | (() => S),
+  delay: number,
+  initialRunning: boolean = true
+): [S, Dispatch<SetStateAction<S>>, boolean, (r: boolean) => void] {
+  const [state, setState] = useState(initialState);
+  const [running, setRunning] = useAnimated(
+    useCallback(() => setState((s) => s.next()), [setState]),
+    delay,
+    initialRunning
+  );
+  return [state, setState, running, setRunning];
 }

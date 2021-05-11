@@ -2,7 +2,6 @@
   "name": "automata",
   "version": "0.0.1",
   "description": "Cellular automata",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
@@ -12,7 +11,6 @@
   "dependencies": {
     "@headlessui/react": "^1.1.1",
     "@heroicons/react": "^1.0.1",
-    "immer": "^9.0.2",
     "next": "^10.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
