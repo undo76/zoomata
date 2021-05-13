@@ -29,8 +29,6 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
   cursorStyle = "red",
 }) => {
   let canvasRef = useRef<HTMLCanvasElement>(null);
-  const [cursor, setCursor] = useState<Cell2d>([0, 0]);
-  // const [mouseOver, setMouseOver] = useState<boolean>(false);
 
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d");
@@ -74,7 +72,6 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
         if (editable) {
           const newCursor = eventToCell(ev);
           onClick(newCursor);
-          setCursor(newCursor);
         }
       }}
     />

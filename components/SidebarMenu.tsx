@@ -2,8 +2,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment } from "react";
 import { XIcon } from "@heroicons/react/outline";
 import classNames from "../libs/class-names";
-import { Logo } from "./Logo";
+import { LogoIcon } from "./LogoIcon";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export interface MenuNavigation {
   name: string;
@@ -23,6 +24,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
   setSidebarOpen,
   navigation,
 }) => {
+  const router = useRouter();
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -77,7 +79,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
                 <div className="flex-shrink-0 flex items-center px-4">
                   <div className="flex items-center flex-shrink-0 px-4">
                     <div className="w-8 h-8">
-                      <Logo />
+                      <LogoIcon />
                     </div>
                     <h1 className="ml-4 text-3xl text-yellow-300 font-light uppercase">
                       Zoomata
@@ -127,7 +129,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div className="flex items-center flex-shrink-0 px-4">
                 <div className="w-8 h-8">
-                  <Logo />
+                  <LogoIcon />
                 </div>
                 <h1 className="ml-4 text-3xl text-yellow-300 font-light uppercase">
                   Zoomata
@@ -137,23 +139,22 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
                 {navigation.map((item) => (
                   <Link key={item.name} href={item.href}>
                     <a
-                      href={item.href}
                       className={classNames(
-                        item.current
+                        router.asPath === item.href
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
                     >
-                      <item.icon
-                        className={classNames(
-                          item.current
-                            ? "text-gray-300"
-                            : "text-gray-400 group-hover:text-gray-300",
-                          "mr-3 h-6 w-6"
-                        )}
-                        aria-hidden="true"
-                      />
+                      {/*<item.icon*/}
+                      {/*  className={classNames(*/}
+                      {/*    item.current*/}
+                      {/*      ? "text-gray-300"*/}
+                      {/*      : "text-gray-400 group-hover:text-gray-300",*/}
+                      {/*    "mr-3 h-6 w-6"*/}
+                      {/*  )}*/}
+                      {/*  aria-hidden="true"*/}
+                      {/*/>*/}
                       {item.name}
                     </a>
                   </Link>

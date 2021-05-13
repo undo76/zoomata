@@ -40,3 +40,16 @@ export function vonNeumannNeighborhood([x, y]: Cell2d): Cell2d[] {
     [x, y + 1]
   ];
 }
+
+function stringToCellValues(
+  str: string,
+  emptyChar = " ",
+  emptyValue = 0
+): (number | typeof emptyValue)[] {
+  const chars: string[] = Array.from(new Set(str))
+    .filter((c) => c !== emptyChar)
+    .sort();
+  return Array.from(str).map((c) =>
+    c === emptyChar ? emptyValue : chars.indexOf(c)
+  );
+}

@@ -28,9 +28,9 @@ export const GridWorld2dAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
           <AnimationControls
             setRunning={setRunning}
             running={running}
-            onStep={() => setWorld(world.next())}
-            onReset={() => setWorld(world.reset())}
-            onClear={() => setWorld(world.clear())}
+            onStep={() => setWorld((w) => w.next())}
+            onReset={() => setWorld((w) => w.reset())}
+            onClear={() => setWorld((w) => w.clear())}
           />
         </div>
       </div>

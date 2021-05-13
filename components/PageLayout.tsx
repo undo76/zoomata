@@ -6,10 +6,11 @@ import {
   MenuIcon,
   UsersIcon,
 } from "@heroicons/react/outline";
+import { LogoIcon } from "./LogoIcon";
 
 const defaultNavigation = [
   { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
-  { name: "Wolfram", href: "/wolfram", icon: UsersIcon, current: false },
+  { name: "Wolfram", href: "/wolfram", icon: HomeIcon, current: false },
   {
     name: "Self-reproducing",
     href: "/self-reproducing",
@@ -18,7 +19,7 @@ const defaultNavigation = [
   },
   {
     name: "Game of life",
-    href: "game-of-life",
+    href: "/game-of-life",
     icon: FolderIcon,
     current: false,
   },

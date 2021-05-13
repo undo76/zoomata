@@ -7,6 +7,7 @@ import { selfReproducingRule } from "./self-reproducing";
 import * as React from "react";
 import { GridWorld2dAutomata } from "../components/GridWorld2dAutomata";
 import { GridWorld2d, MutableGridWorld2d } from "../libs/grid-world-2d";
+import { AnimationControls } from "../components/AnimationControls";
 
 const circleInitFn = (w: MutableGridWorld2d) =>
   drawCircleInWorld(w, [25, 25], 3);
@@ -42,7 +43,7 @@ export default function Dashboard() {
 const Widget: React.FC<{ title: string }> = ({ title, children }) => {
   return (
     <div className="rounded rounded-lg overflow-hidden p-1 shadow-lg bg-white relative">
-      <div className="absolute  p-1 bg-gray-100 bg-opacity-75 text-gray-700 font-bold text-lg">
+      <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-800 bg-opacity-75 text-white font-semibold rounded">
         {title}
       </div>
       {children}
@@ -55,10 +56,22 @@ const AnimatedGridWorld2Widget: React.FC<{
   initialState: GridWorld2d | (() => GridWorld2d);
   delay: number;
 }> = ({ title, initialState, delay, children }) => {
-  const [world] = useAnimatedState(initialState, delay);
+  const [world, setWorld, running, setRunning] = useAnimatedState(
+    initialState,
+    delay
+  );
   return (
     <Widget title={title}>
       <GridWorld2dAutomata world={world} />
+      <div className="absolute p-1 bottom-1">
+        <AnimationControls
+          setRunning={setRunning}
+          running={running}
+          onStep={() => setWorld((w) => w.next())}
+          onReset={() => setWorld((w) => w.reset())}
+          onClear={() => setWorld((w) => w.clear())}
+        />
+      </div>
     </Widget>
   );
 };

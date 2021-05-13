@@ -19,7 +19,7 @@ export function useAnimated(
     if (running) {
       timeoutId.current = setInterval(onStep, delay);
     }
-    return () => clearTimeout(timeoutId.current!);
+    return () => clearInterval(timeoutId.current!);
   }, [onStep, delay, running]);
 
   return [running, setRunning];
