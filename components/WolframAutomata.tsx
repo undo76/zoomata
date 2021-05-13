@@ -7,7 +7,7 @@ export interface WolframAutomataProps {
   width: number;
   steps: number;
   editable?: boolean;
-  colorMap?: ColorMap;
+  colorMapping?: ColorMap;
 }
 
 export const WolframAutomata: React.FC<WolframAutomataProps> = ({
@@ -15,12 +15,12 @@ export const WolframAutomata: React.FC<WolframAutomataProps> = ({
   width,
   steps,
   editable = false,
-  colorMap = ["#f1e5c3", "rgb(31, 41, 55)"],
+  colorMapping = ["#f1e5c3", "rgb(31, 41, 55)"],
 }) => {
   const world = computeSteps(rule, width, steps);
   const fillStyleFn = useCallback(
-    ([x, y]) => colorMap[world.getCellState([x, y])],
-    [world, colorMap]
+    (cell) => colorMapping[world.getCellState(cell)],
+    [world, colorMapping]
   );
   return (
     <GridCanvas

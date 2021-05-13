@@ -1,10 +1,10 @@
 import { PageLayout } from "../components/PageLayout";
 import { WolframAutomata } from "../components/WolframAutomata";
-import { useAnimatedState } from "../libs/use-animated-world";
+import { useAnimatedIterable } from "../libs/use-animated";
 import { gameOfLifeRule } from "./game-of-life";
 import { drawCircleInWorld, randomizeWorld } from "../libs/utils";
 import { selfReproducingRule } from "./self-reproducing";
-import * as React from "react";
+import React from "react";
 import { GridWorld2dAutomata } from "../components/GridWorld2dAutomata";
 import { GridWorld2d, MutableGridWorld2d } from "../libs/grid-world-2d";
 import { AnimationControls } from "../components/AnimationControls";
@@ -56,7 +56,7 @@ const AnimatedGridWorld2Widget: React.FC<{
   initialState: GridWorld2d | (() => GridWorld2d);
   delay: number;
 }> = ({ title, initialState, delay, children }) => {
-  const [world, setWorld, running, setRunning] = useAnimatedState(
+  const [world, setWorld, running, setRunning] = useAnimatedIterable(
     initialState,
     delay
   );

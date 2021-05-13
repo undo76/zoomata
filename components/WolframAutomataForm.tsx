@@ -19,12 +19,9 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
   return (
     <div className="mb-4 bg-white overflow-hidden shadow sm:rounded-lg">
       <div className="flex px-4 py-5 sm:p-6 space-x-4">
-        <InputField label="Rule" id="rule">
+        <InputField label="Rule" name="rule">
           <input
             type="number"
-            name="rule"
-            id="rule"
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             placeholder="0-255"
             min={0}
             max={255}
@@ -37,12 +34,9 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
             }
           />
         </InputField>
-        <InputField label="Width" id="width">
+        <InputField label="Width" name="width">
           <input
             type="number"
-            name="width"
-            id="width"
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             placeholder="0-1000"
             min={1}
             max={1000}
@@ -55,12 +49,9 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
             }
           />
         </InputField>
-        <InputField label="Steps" id="steps">
+        <InputField label="Steps" name="steps">
           <input
             type="number"
-            name="steps"
-            id="steps"
-            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
             placeholder="0-1000"
             min={1}
             max={1000}

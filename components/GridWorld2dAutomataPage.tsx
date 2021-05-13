@@ -1,4 +1,4 @@
-import { useAnimatedState } from "../libs/use-animated-world";
+import { useAnimatedIterable } from "../libs/use-animated";
 import { GridWorld2d, MutableGridWorld2d, Rule2d } from "../libs/grid-world-2d";
 import { PageLayout } from "./PageLayout";
 import { GridWorld2dAutomata } from "./GridWorld2dAutomata";
@@ -16,7 +16,7 @@ export const GridWorld2dAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
   initFn,
   rule,
 }) => {
-  const [world, setWorld, running, setRunning] = useAnimatedState(
+  const [world, setWorld, running, setRunning] = useAnimatedIterable(
     () => new GridWorld2d(100, 100, initFn, rule),
     10
   );

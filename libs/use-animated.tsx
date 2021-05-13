@@ -12,12 +12,17 @@ export function useAnimated(
   delay: number,
   initialRunning: boolean = true
 ): [boolean, (r: boolean) => void] {
-  const [running, setRunning] = useState(initialRunning);
+  const callback = useRef(onStep);
   const timeoutId = useRef<NodeJS.Timeout>();
+  const [running, setRunning] = useState<boolean>(initialRunning);
+
+  useEffect(() => {
+    callback.current = onStep;
+  }, [onStep]);
 
   useEffect(() => {
     if (running) {
-      timeoutId.current = setInterval(onStep, delay);
+      timeoutId.current = setInterval(callback.current, delay);
     }
     return () => clearInterval(timeoutId.current!);
   }, [onStep, delay, running]);
@@ -25,7 +30,7 @@ export function useAnimated(
   return [running, setRunning];
 }
 
-export function useAnimatedState<S extends { next: () => S }>(
+export function useAnimatedIterable<S extends { next: () => S }>(
   initialState: S | (() => S),
   delay: number,
   initialRunning: boolean = true

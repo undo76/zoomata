@@ -5,18 +5,18 @@ import { Cell2d, GridWorld2d } from "../libs/grid-world-2d";
 export interface Grid2dAutomataProps {
   world: GridWorld2d;
   setWorld?: Dispatch<SetStateAction<GridWorld2d>>;
-  colorMap?: ColorMap;
+  colorMapping?: ColorMap;
   editable?: boolean;
 }
 
 export const GridWorld2dAutomata: React.FC<Grid2dAutomataProps> = ({
   world,
   setWorld,
-  colorMap = ["#ddd", "#5c0707"],
+  colorMapping = ["#ddd", "#5c0707"],
   editable = false,
 }) => {
   const fillStyleFn = ([x, y]: [number, number]) =>
-    colorMap[world.getCellState([x, y])];
+    colorMapping[world.getCellState([x, y])];
   return (
     <GridCanvas
       cellWidth={Math.round(1000 / world.width)}
