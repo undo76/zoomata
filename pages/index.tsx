@@ -74,19 +74,6 @@ const AnimatedGridWorld2Widget: React.FC<{
   return (
     <Widget title={title}>
       <Grid2dWorldAutomata world={world} />
-      {/*<div className="absolute p-1 bottom-1">*/}
-      {/*  <AnimationControls*/}
-      {/*    setRunning={setRunning}*/}
-      {/*    running={running}*/}
-      {/*    canUndo={world.history.canUndo()}*/}
-      {/*    canRedo={world.history.canRedo()}*/}
-      {/*    onStep={() => setWorld((w) => w.next())}*/}
-      {/*    onReset={() => setWorld((w) => w.reset())}*/}
-      {/*    onClear={() => setWorld((w) => w.clear())}*/}
-      {/*    onUndo={() => setWorld((w) => w.history.undo()!)}*/}
-      {/*    onRedo={() => setWorld((w) => w.history.redo()!)}*/}
-      {/*  />*/}
-      {/*</div>*/}
     </Widget>
   );
 };
