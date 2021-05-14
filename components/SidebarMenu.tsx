@@ -98,15 +98,6 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
                           "group flex items-center px-2 py-2 text-base font-medium rounded-md"
                         )}
                       >
-                        <item.icon
-                          className={classNames(
-                            item.current
-                              ? "text-gray-300"
-                              : "text-gray-400 group-hover:text-gray-300",
-                            "mr-4 h-6 w-6"
-                          )}
-                          aria-hidden="true"
-                        />
                         {item.name}
                       </a>
                     </Link>
@@ -146,15 +137,6 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
                         "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
                       )}
                     >
-                      {/*<item.icon*/}
-                      {/*  className={classNames(*/}
-                      {/*    item.current*/}
-                      {/*      ? "text-gray-300"*/}
-                      {/*      : "text-gray-400 group-hover:text-gray-300",*/}
-                      {/*    "mr-3 h-6 w-6"*/}
-                      {/*  )}*/}
-                      {/*  aria-hidden="true"*/}
-                      {/*/>*/}
                       {item.name}
                     </a>
                   </Link>
