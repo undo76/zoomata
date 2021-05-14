@@ -34,6 +34,7 @@ export const AnimationControls: React.FC<AnimationControlsProps> = ({
   onUndo,
   onRedo,
 }) => {
+  const iconClassName = "sm:-ml-0.5 sm:mr-2 h-4 w-4";
   return (
     <div className="flex space-x-1">
       <Button onClick={() => setRunning(!running)}>
@@ -42,17 +43,17 @@ export const AnimationControls: React.FC<AnimationControlsProps> = ({
         ) : (
           <PlayIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />
         )}
-        {running ? "Pause" : "Run"}
+        <span>{running ? "Pause" : "Run"}</span>
       </Button>
 
       {!running && (
         <>
           <Button onClick={onStep}>
             <ArrowRightIcon
-              className="-ml-0.5 mr-2 h-4 w-4"
+              className="sm:-ml-0.5 sm:mr-2 h-4 w-4"
               aria-hidden="true"
             />
-            Step
+            <span className="hidden sm:block">Step</span>
           </Button>
 
           <ButtonGroup>
@@ -67,12 +68,13 @@ export const AnimationControls: React.FC<AnimationControlsProps> = ({
           </ButtonGroup>
 
           <Button onClick={onReset}>
-            <RefreshIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />
-            Reset
+            <RefreshIcon className={iconClassName} aria-hidden="true" />
+            <span className="hidden sm:block">Reset</span>
           </Button>
+
           <Button onClick={onClear}>
-            <TrashIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />
-            Clear
+            <TrashIcon className={iconClassName} aria-hidden="true" />
+            <span className="hidden sm:block">Clear</span>
           </Button>
         </>
       )}
