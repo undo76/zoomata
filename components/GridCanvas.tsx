@@ -1,5 +1,5 @@
 import React, { MouseEvent, useEffect, useRef, useState } from "react";
-import { Cell2d } from "../libs/grid-world-2d";
+import { Cell2d } from "../libs/grid2d-world";
 
 export interface ColorMap {
   [state: number]: string | CanvasGradient | CanvasPattern;

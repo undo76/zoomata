@@ -1,8 +1,8 @@
-import { Cell2d, GridWorld2d, State2d } from "../libs/grid-world-2d";
+import { Cell2d, Grid2dWorld, State } from "../libs/grid2d-world";
 import { drawCircleInWorld, vonNeumannNeighborhood } from "../libs/utils";
-import { GridWorld2dAutomataPage } from "../components/GridWorld2dAutomataPage";
+import { Grid2dWorldAutomataPage } from "../components/Grid2dWorldAutomataPage";
 
-export function selfReproducingRule(world: GridWorld2d, cell: Cell2d): State2d {
+export function selfReproducingRule(world: Grid2dWorld, cell: Cell2d): State {
   return (
     vonNeumannNeighborhood(cell)
       .map((c) => world.getCellState(c))
@@ -12,7 +12,7 @@ export function selfReproducingRule(world: GridWorld2d, cell: Cell2d): State2d {
 
 export default function SelfReproducing() {
   return (
-    <GridWorld2dAutomataPage
+    <Grid2dWorldAutomataPage
       title="Self-reproducing cellular automata"
       initFn={(w) =>
         drawCircleInWorld(

@@ -1,8 +1,8 @@
 import { mooreNeighborhood, randomizeWorld } from "../libs/utils";
-import { GridWorld2dAutomataPage } from "../components/GridWorld2dAutomataPage";
-import { Cell2d, GridWorld2d, State2d } from "../libs/grid-world-2d";
+import { Grid2dWorldAutomataPage } from "../components/Grid2dWorldAutomataPage";
+import { Cell2d, Grid2dWorld, State } from "../libs/grid2d-world";
 
-export function gameOfLifeRule(world: GridWorld2d, cell: Cell2d): State2d {
+export function gameOfLifeRule(world: Grid2dWorld, cell: Cell2d): State {
   const count = mooreNeighborhood(cell)
     .map((c) => world.getCellState(c))
     .reduce((sum, current) => sum + current, 0);
@@ -17,7 +17,7 @@ export function gameOfLifeRule(world: GridWorld2d, cell: Cell2d): State2d {
 
 export default function GameOfLifePage() {
   return (
-    <GridWorld2dAutomataPage
+    <Grid2dWorldAutomataPage
       title="Game of life"
       initFn={randomizeWorld}
       rule={gameOfLifeRule}

@@ -1,15 +1,26 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { ColorMap, GridCanvas } from "./GridCanvas";
-import { Cell2d, GridWorld2d } from "../libs/grid-world-2d";
+import { Cell2d, Grid2dWorld, MutableGrid2dWorld } from "../libs/grid2d-world";
+import { drawPatchInWorld, stringToPatch } from "../libs/utils";
+import { patches } from "../libs/patches";
 
-export interface Grid2dAutomataProps {
-  world: GridWorld2d;
-  setWorld?: Dispatch<SetStateAction<GridWorld2d>>;
+export interface Grid2dWorldAutomataProps {
+  world: Grid2dWorld;
+  setWorld?: Dispatch<SetStateAction<Grid2dWorld>>;
   colorMapping?: ColorMap;
   editable?: boolean;
 }
 
-export const GridWorld2dAutomata: React.FC<Grid2dAutomataProps> = ({
+function handleEdit(
+  world: Grid2dWorld,
+  draft: MutableGrid2dWorld,
+  cell: [number, number]
+) {
+  draft.setCellState(cell, +!world.getCellState(cell));
+  // (draft) => drawPatchInWorld(draft, patches.gliderRightDown, cell)
+}
+
+export const Grid2dWorldAutomata: React.FC<Grid2dWorldAutomataProps> = ({
   world,
   setWorld,
   colorMapping = ["#ddd", "#5c0707"],
@@ -29,9 +40,7 @@ export const GridWorld2dAutomata: React.FC<Grid2dAutomataProps> = ({
       onClick={(cell: Cell2d) => {
         if (editable && setWorld)
           setWorld((world) =>
-            world.mutate((draft) =>
-              draft.setCellState(cell, +!world.getCellState(cell))
-            )
+            world.mutate((draft) => handleEdit(world, draft, cell))
           );
       }}
     />

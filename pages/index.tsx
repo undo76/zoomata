@@ -5,36 +5,47 @@ import { gameOfLifeRule } from "./game-of-life";
 import { drawCircleInWorld, randomizeWorld } from "../libs/utils";
 import { selfReproducingRule } from "./self-reproducing";
 import React from "react";
-import { GridWorld2dAutomata } from "../components/GridWorld2dAutomata";
-import { GridWorld2d, MutableGridWorld2d } from "../libs/grid-world-2d";
-import { AnimationControls } from "../components/AnimationControls";
+import { Grid2dWorldAutomata } from "../components/Grid2dWorldAutomata";
+import { Grid2dWorld, MutableGrid2dWorld } from "../libs/grid2d-world";
+import Link from "next/link";
 
-const circleInitFn = (w: MutableGridWorld2d) =>
+const circleInitFn = (w: MutableGrid2dWorld) =>
   drawCircleInWorld(w, [25, 25], 3);
 
 export default function Dashboard() {
   return (
     <PageLayout title="Gallery">
       <div className="flex space-x-1">
-        <Widget title="Wolfram 1D">
-          <WolframAutomata rule={30} width={50} steps={50} />
-        </Widget>
+        <Link href="/wolfram">
+          <a>
+            <Widget title="Wolfram 1D">
+              <WolframAutomata rule={30} width={50} steps={50} />
+            </Widget>
+          </a>
+        </Link>
 
-        <AnimatedGridWorld2Widget
-          title="Self-reproducing"
-          initialState={() =>
-            new GridWorld2d(50, 50, circleInitFn, selfReproducingRule)
-          }
-          delay={100}
-        />
-
-        <AnimatedGridWorld2Widget
-          title="Game of life"
-          initialState={() =>
-            new GridWorld2d(50, 50, randomizeWorld, gameOfLifeRule)
-          }
-          delay={100}
-        />
+        <Link href="/self-reproducing">
+          <a>
+            <AnimatedGridWorld2Widget
+              title="Self-reproducing"
+              initialState={() =>
+                new Grid2dWorld(50, 50, circleInitFn, selfReproducingRule)
+              }
+              delay={100}
+            />
+          </a>
+        </Link>
+        <Link href="/game-of-life">
+          <a>
+            <AnimatedGridWorld2Widget
+              title="Game of life"
+              initialState={() =>
+                new Grid2dWorld(50, 50, randomizeWorld, gameOfLifeRule)
+              }
+              delay={100}
+            />
+          </a>
+        </Link>
       </div>
     </PageLayout>
   );
@@ -53,7 +64,7 @@ const Widget: React.FC<{ title: string }> = ({ title, children }) => {
 
 const AnimatedGridWorld2Widget: React.FC<{
   title: string;
-  initialState: GridWorld2d | (() => GridWorld2d);
+  initialState: Grid2dWorld | (() => Grid2dWorld);
   delay: number;
 }> = ({ title, initialState, delay, children }) => {
   const [world, setWorld, running, setRunning] = useAnimatedIterable(
@@ -62,16 +73,20 @@ const AnimatedGridWorld2Widget: React.FC<{
   );
   return (
     <Widget title={title}>
-      <GridWorld2dAutomata world={world} />
-      <div className="absolute p-1 bottom-1">
-        <AnimationControls
-          setRunning={setRunning}
-          running={running}
-          onStep={() => setWorld((w) => w.next())}
-          onReset={() => setWorld((w) => w.reset())}
-          onClear={() => setWorld((w) => w.clear())}
-        />
-      </div>
+      <Grid2dWorldAutomata world={world} />
+      {/*<div className="absolute p-1 bottom-1">*/}
+      {/*  <AnimationControls*/}
+      {/*    setRunning={setRunning}*/}
+      {/*    running={running}*/}
+      {/*    canUndo={world.history.canUndo()}*/}
+      {/*    canRedo={world.history.canRedo()}*/}
+      {/*    onStep={() => setWorld((w) => w.next())}*/}
+      {/*    onReset={() => setWorld((w) => w.reset())}*/}
+      {/*    onClear={() => setWorld((w) => w.clear())}*/}
+      {/*    onUndo={() => setWorld((w) => w.history.undo()!)}*/}
+      {/*    onRedo={() => setWorld((w) => w.history.redo()!)}*/}
+      {/*  />*/}
+      {/*</div>*/}
     </Widget>
   );
 };

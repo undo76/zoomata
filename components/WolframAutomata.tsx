@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from "react";
 import { ColorMap, GridCanvas } from "./GridCanvas";
-import { Cell2d, GridWorld2d, Rule2d } from "../libs/grid-world-2d";
+import { Cell2d, Grid2dWorld, Rule2d } from "../libs/grid2d-world";
 
 export interface WolframAutomataProps {
   rule: number;
@@ -35,8 +35,8 @@ export const WolframAutomata: React.FC<WolframAutomataProps> = ({
   );
 };
 
-function computeSteps(rule: number, width: number, steps: number): GridWorld2d {
-  const world = new GridWorld2d(width, steps, undefined, wolframRule(rule));
+function computeSteps(rule: number, width: number, steps: number): Grid2dWorld {
+  const world = new Grid2dWorld(width, steps, undefined, wolframRule(rule));
   return world.mutate((draft) => {
     draft.setCellState([Math.floor(width / 2), 0], 1);
     for (let y = 0; y < steps; y++) {
@@ -48,7 +48,7 @@ function computeSteps(rule: number, width: number, steps: number): GridWorld2d {
 }
 
 function wolframRule(ruleNumber: number): Rule2d {
-  return (world: GridWorld2d, [x, y]: Cell2d) => {
+  return (world: Grid2dWorld, [x, y]: Cell2d) => {
     if (y === 0) return world.getCellState([x, y]);
     else {
       const left = world.getCellState([x - 1, y - 1]);

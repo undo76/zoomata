@@ -1,6 +1,8 @@
-import { Cell2d, MutableGridWorld2d } from "./grid-world-2d";
+import { Cell2d, MutableGrid2dWorld, State } from "./grid2d-world";
 
-export function randomizeWorld(world: MutableGridWorld2d) {
+type Patch2d = (State | null)[][];
+
+export function randomizeWorld(world: MutableGrid2dWorld) {
   for (let x = 0; x < world.width; x++) {
     for (let y = 0; y < world.height; y++) {
       world.setCellState([x, y], +(Math.random() > 0.5));
@@ -9,7 +11,7 @@ export function randomizeWorld(world: MutableGridWorld2d) {
 }
 
 export function drawCircleInWorld(
-  world: MutableGridWorld2d,
+  world: MutableGrid2dWorld,
   [cx, cy]: Cell2d,
   radius: number
 ) {
@@ -19,6 +21,21 @@ export function drawCircleInWorld(
         [x, y],
         +((x - cx) ** 2 + (y - cy) ** 2 <= radius ** 2)
       );
+    }
+  }
+}
+
+export function drawPatchInWorld(
+  world: MutableGrid2dWorld,
+  patch: Patch2d,
+  [minX, minY]: Cell2d
+) {
+  for (let y = 0; y < patch.length; y++) {
+    for (let x = 0; x < patch[y].length; x++) {
+      let stateValue = patch[y][x];
+      if (stateValue !== null) {
+        world.setCellState([x + minX, y + minY], stateValue);
+      }
     }
   }
 }
@@ -41,15 +58,22 @@ export function vonNeumannNeighborhood([x, y]: Cell2d): Cell2d[] {
   ];
 }
 
-function stringToCellValues(
+export function stringToPatch(
   str: string,
   emptyChar = " ",
-  emptyValue = 0
-): (number | typeof emptyValue)[] {
-  const chars: string[] = Array.from(new Set(str))
-    .filter((c) => c !== emptyChar)
-    .sort();
-  return Array.from(str).map((c) =>
-    c === emptyChar ? emptyValue : chars.indexOf(c)
-  );
+  emptyValue: State | null = null,
+  values = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+): Patch2d {
+  return str
+    .split("\n")
+    .filter((line) => line.length > 0)
+    .map((line) =>
+      Array.from(line).map((c) =>
+        c === emptyChar ? emptyValue : values.indexOf(c)
+      )
+    );
+}
+
+export function mod(a: number, b: number): number {
+  return ((a % b) + b) % b;
 }
