@@ -64,8 +64,6 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
               <h2 className="text-2xl font-light uppercase text-gray-700">
                 {title}
               </h2>
-            </div>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
               <div className="py-4">{children}</div>
             </div>
           </div>
