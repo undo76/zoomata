@@ -15,7 +15,9 @@ export default function Wolfram() {
       <WolframAutomataForm state={state} setState={setState} />
 
       <div className="rounded rounded-lg overflow-hidden p-1 shadow-lg bg-white">
-        <WolframAutomata rule={rule} width={width} steps={steps} />
+        <div className="rounded overflow-hidden">
+          <WolframAutomata rule={rule} width={width} steps={steps} />
+        </div>
       </div>
     </PageLayout>
   );

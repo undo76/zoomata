@@ -6,10 +6,9 @@ import {
   MenuIcon,
   UsersIcon,
 } from "@heroicons/react/outline";
-import { LogoIcon } from "./LogoIcon";
 
 const defaultNavigation = [
-  { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
+  { name: "Gallery", href: "/", icon: HomeIcon, current: true },
   { name: "Wolfram", href: "/wolfram", icon: HomeIcon, current: false },
   {
     name: "Self-reproducing",

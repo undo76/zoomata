@@ -1,8 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { ColorMap, GridCanvas } from "./GridCanvas";
 import { Cell2d, Grid2dWorld, MutableGrid2dWorld } from "../libs/grid2d-world";
-import { drawPatchInWorld, stringToPatch } from "../libs/utils";
-import { patches } from "../libs/patches";
 
 export interface Grid2dWorldAutomataProps {
   world: Grid2dWorld;

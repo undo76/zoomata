@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { ColorMap, GridCanvas } from "./GridCanvas";
 import { Cell2d, Grid2dWorld, Rule2d } from "../libs/grid2d-world";
 

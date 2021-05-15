@@ -22,8 +22,10 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
   );
   return (
     <PageLayout title={title}>
-      <div className="relative rounded rounded-lg overflow-hidden mb-2 p-1 shadow-lg bg-white max-h-">
-        <Grid2dWorldAutomata world={world} editable setWorld={setWorld} />
+      <div className="relative rounded rounded-lg overflow-hidden mb-2 p-1 shadow-lg bg-white">
+        <div className="rounded overflow-hidden">
+          <Grid2dWorldAutomata world={world} editable setWorld={setWorld} />
+        </div>
         <div className="absolute bottom-2 left-2">
           <AnimationControls
             setRunning={setRunning}

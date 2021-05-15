@@ -33,7 +33,7 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
   useEffect(() => {
     const ctx = canvasRef.current?.getContext("2d");
     if (ctx != null) {
-      ctx.imageSmoothingEnabled = false;
+      ctx.imageSmoothingEnabled = true;
       ctx.clearRect(0, 0, cellWidth * cols, cellHeight * rows);
       for (let x = 0; x < cols; x++) {
         for (let y = 0; y < rows; y++) {
@@ -67,7 +67,6 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
       width={cellWidth * cols - padding}
       height={cellHeight * rows - padding}
       style={{ width: "100%", cursor: editable ? "crosshair" : "initial" }}
-      className="rounded"
       onClick={(ev) => {
         if (editable) {
           const newCursor = eventToCell(ev);

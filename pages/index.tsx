@@ -12,67 +12,61 @@ import Link from "next/link";
 const circleInitFn = (w: MutableGrid2dWorld) =>
   drawCircleInWorld(w, [25, 25], 3);
 
-export default function Dashboard() {
+export default function Gallery() {
   return (
     <PageLayout title="Gallery">
-      <div className="flex space-x-1">
-        <Link href="/wolfram">
-          <a>
-            <Widget title="Wolfram 1D">
-              <WolframAutomata rule={30} width={50} steps={50} />
-            </Widget>
-          </a>
-        </Link>
+      <div className="flex flex-wrap">
+        <Widget title="Wolfram 1D" href="/wolfram">
+          <WolframAutomata rule={30} width={50} steps={50} />
+        </Widget>
 
-        <Link href="/self-reproducing">
-          <a>
-            <AnimatedGridWorld2Widget
-              title="Self-reproducing"
-              initialState={() =>
-                new Grid2dWorld(50, 50, circleInitFn, selfReproducingRule)
-              }
-              delay={100}
-            />
-          </a>
-        </Link>
-        <Link href="/game-of-life">
-          <a>
-            <AnimatedGridWorld2Widget
-              title="Game of life"
-              initialState={() =>
-                new Grid2dWorld(50, 50, randomizeWorld, gameOfLifeRule)
-              }
-              delay={100}
-            />
-          </a>
-        </Link>
+        <AnimatedGridWorld2Widget
+          title="Self-reproducing"
+          href="/self-reproducing"
+          initialState={() =>
+            new Grid2dWorld(50, 50, circleInitFn, selfReproducingRule)
+          }
+          delay={100}
+        />
+
+        <AnimatedGridWorld2Widget
+          title="Game of life"
+          href="/game-of-life"
+          initialState={() =>
+            new Grid2dWorld(50, 50, randomizeWorld, gameOfLifeRule)
+          }
+          delay={100}
+        />
       </div>
     </PageLayout>
   );
 }
 
-const Widget: React.FC<{ title: string }> = ({ title, children }) => {
+let Widget: React.FC<{
+  title: string;
+  href: string;
+}> = ({ title, href, children }) => {
   return (
-    <div className="rounded rounded-lg overflow-hidden p-1 shadow-lg bg-white relative">
-      <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-800 bg-opacity-75 text-white font-semibold rounded">
-        {title}
-      </div>
-      {children}
-    </div>
+    <Link href={href}>
+      <a href={href} className="relative block overflow-hidden p-px w-1/2">
+        <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-800 bg-opacity-75 text-white font-semibold rounded">
+          {title}
+        </div>
+        {children}
+      </a>
+    </Link>
   );
 };
 
 const AnimatedGridWorld2Widget: React.FC<{
   title: string;
+  href: string;
   initialState: Grid2dWorld | (() => Grid2dWorld);
   delay: number;
-}> = ({ title, initialState, delay, children }) => {
-  const [world, setWorld, running, setRunning] = useAnimatedIterable(
-    initialState,
-    delay
-  );
+}> = ({ title, href, initialState, delay }) => {
+  const [world] = useAnimatedIterable(initialState, delay);
   return (
-    <Widget title={title}>
+    <Widget title={title} href={href}>
       <Grid2dWorldAutomata world={world} />
     </Widget>
   );
