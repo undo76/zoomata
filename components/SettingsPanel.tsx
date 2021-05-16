@@ -18,7 +18,7 @@ export const SettingsPanel: React.FC<{
         onClose={setOpen}
       >
         <div className="absolute inset-0 overflow-hidden">
-          <Dialog.Overlay className="absolute inset-0" />
+          <Dialog.Overlay className="absolute inset-0 backdrop-filter backdrop-blur-sm" />
 
           <div className="fixed inset-y-0 right-0 pl-10 max-w-full flex">
             <Transition.Child
@@ -30,7 +30,7 @@ export const SettingsPanel: React.FC<{
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="w-screen max-w-md">
+              <div className="w-screen max-w-md opacity-90">
                 <div className="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
                   <div className="px-4 sm:px-6">
                     <div className="flex items-start justify-between">
