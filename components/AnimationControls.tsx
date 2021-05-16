@@ -8,7 +8,7 @@ import {
   RefreshIcon,
   TrashIcon,
 } from "@heroicons/react/outline";
-import React, { useEffect } from "react";
+import React from "react";
 import { Button } from "./Button";
 import { ButtonGroup } from "./ButtonGroup";
 
@@ -80,13 +80,12 @@ export const AnimationControls: React.FC<AnimationControlsProps> = React.memo(
               <TrashIcon className={iconClassName} aria-hidden="true" />
               <span className="hidden sm:block">Clear</span>
             </Button>
-
-            <Button onClick={onSettings}>
-              <CogIcon className={iconClassName} aria-hidden="true" />
-              <span className="hidden sm:block">Settings</span>
-            </Button>
           </>
         )}
+        <Button onClick={onSettings}>
+          <CogIcon className={iconClassName} aria-hidden="true" />
+          <span className="hidden sm:block">Settings</span>
+        </Button>
       </div>
     );
   }

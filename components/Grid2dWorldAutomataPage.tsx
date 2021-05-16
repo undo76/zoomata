@@ -23,13 +23,13 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
   initialDelay = 50,
   initialColorMapping = ["#ddd", "#2d0000"],
 }) => {
-  const [world, setWorld, running, setRunning] = useAnimatedIterable(
-    () => new Grid2dWorld(100, 100, initFn, rule),
-    initialDelay
-  );
-
+  const [delay, setDelay] = useState(initialDelay);
   const [colorMapping, setColorMapping] = useState(() => initialColorMapping);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [world, setWorld, running, setRunning] = useAnimatedIterable(
+    () => new Grid2dWorld(100, 100, initFn, rule),
+    delay
+  );
 
   return (
     <PageLayout title={title}>
@@ -67,47 +67,61 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
         open={settingsOpen}
         setOpen={setSettingsOpen}
       >
-        <div className="flex space-x-2 items-center">
-          <InputField label="Width" name="width">
-            <input
-              type="number"
-              placeholder="0-1000"
-              min={1}
-              max={1000}
-              value={world.width}
-              onChange={(ev) =>
-                setWorld((world) => {
-                  const width = parseInt(ev.target.value, 10);
-                  return new Grid2dWorld(
-                    width,
-                    world.height,
-                    world.initFn,
-                    world.rule
-                  );
-                })
-              }
-            />
-          </InputField>
-          <InputField label="Height" name="height">
-            <input
-              type="number"
-              placeholder="0-1000"
-              min={1}
-              max={1000}
-              value={world.height}
-              onChange={(ev) =>
-                setWorld((world) => {
-                  const height = parseInt(ev.target.value, 10);
-                  return new Grid2dWorld(
-                    world.width,
-                    height,
-                    world.initFn,
-                    world.rule
-                  );
-                })
-              }
-            />
-          </InputField>
+        <div className="flex flex-col space-y-4">
+          <div className="flex space-x-2 items-center">
+            <InputField label="Width" name="width">
+              <input
+                type="number"
+                placeholder="0-1000"
+                min={1}
+                max={1000}
+                value={world.width}
+                onChange={(ev) =>
+                  setWorld((world) => {
+                    const width = parseInt(ev.target.value, 10);
+                    return new Grid2dWorld(
+                      width,
+                      world.height,
+                      world.initFn,
+                      world.rule
+                    );
+                  })
+                }
+              />
+            </InputField>
+            <InputField label="Height" name="height">
+              <input
+                type="number"
+                placeholder="0-1000"
+                min={1}
+                max={1000}
+                value={world.height}
+                onChange={(ev) =>
+                  setWorld((world) => {
+                    const height = parseInt(ev.target.value, 10);
+                    return new Grid2dWorld(
+                      world.width,
+                      height,
+                      world.initFn,
+                      world.rule
+                    );
+                  })
+                }
+              />
+            </InputField>
+          </div>
+          <div className="w-24">
+            <InputField label="Delay" name="delay">
+              <input
+                type="number"
+                placeholder="0-1000"
+                min={0}
+                max={10000}
+                value={delay}
+                onChange={(ev) => setDelay(parseInt(ev.target.value, 10))}
+              />
+            </InputField>
+          </div>
         </div>
       </SettingsPanel>
     </PageLayout>
