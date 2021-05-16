@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from "react";
-import { ColorMap, GridCanvas } from "./GridCanvas";
+import { ColorMap, drawRectCell, GridCanvas } from "./GridCanvas";
 import { Cell2d, Grid2dWorld, MutableGrid2dWorld } from "../libs/grid2d-world";
 
 export interface Grid2dWorldAutomataProps {
@@ -33,7 +33,7 @@ export const Grid2dWorldAutomata: React.FC<Grid2dWorldAutomataProps> = ({
       padding={1}
       cols={world.width}
       rows={world.height}
-      fillStyleFn={fillStyleFn}
+      drawCell={(...params) => drawRectCell(fillStyleFn, ...params)}
       editable={editable}
       onClick={(cell: Cell2d) => {
         if (editable && setWorld)

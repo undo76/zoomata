@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useRef, useState } from "react";
+import React, { MouseEvent, useEffect, useRef } from "react";
 import { Cell2d } from "../libs/grid2d-world";
 
 export interface ColorMap {
@@ -10,7 +10,13 @@ export interface GridCanvasProps {
   cellHeight: number;
   rows: number;
   cols: number;
-  fillStyleFn: ([x, y]: Cell2d) => string | CanvasGradient | CanvasPattern;
+  drawCell: (
+    ctx: CanvasRenderingContext2D,
+    cell: Cell2d,
+    cellWidth: number,
+    cellHeight: number,
+    padding: number
+  ) => void;
   editable: boolean;
   padding?: number;
   onClick?: ([x, y]: [number, number]) => void;
@@ -25,7 +31,7 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
   padding = Math.round(cellWidth / 20),
   editable,
   onClick = () => void 0,
-  fillStyleFn,
+  drawCell,
   cursorStyle = "red",
 }) => {
   let canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,14 +43,7 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
       ctx.clearRect(0, 0, cellWidth * cols, cellHeight * rows);
       for (let x = 0; x < cols; x++) {
         for (let y = 0; y < rows; y++) {
-          drawCell(
-            ctx,
-            [x, y],
-            cellWidth,
-            cellHeight,
-            padding,
-            fillStyleFn([x, y])
-          );
+          drawCell(ctx, [x, y], cellWidth, cellHeight, padding);
         }
       }
     }
@@ -77,15 +76,16 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
   );
 };
 
-function drawCell(
+export function drawRectCell(
+  fillStyleFn: (cell: Cell2d) => string | CanvasGradient | CanvasPattern,
   ctx: CanvasRenderingContext2D,
-  [x, y]: [number, number],
+  cell: Cell2d,
   cellWidth: number,
   cellHeight: number,
-  padding: number,
-  style: string | CanvasGradient | CanvasPattern
+  padding: number
 ) {
-  ctx.fillStyle = style;
+  const [x, y] = cell;
+  ctx.fillStyle = fillStyleFn(cell);
   ctx.fillRect(
     x * cellWidth,
     y * cellHeight,

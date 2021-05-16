@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { ColorMap, GridCanvas } from "./GridCanvas";
+import { ColorMap, drawRectCell, GridCanvas } from "./GridCanvas";
 import { Cell2d, Grid2dWorld, Rule2d } from "../libs/grid2d-world";
 
 export interface WolframAutomataProps {
@@ -30,7 +30,7 @@ export const WolframAutomata: React.FC<WolframAutomataProps> = ({
       cols={width}
       rows={steps}
       editable={editable}
-      fillStyleFn={fillStyleFn}
+      drawCell={(...params) => drawRectCell(fillStyleFn, ...params)}
     />
   );
 };
