@@ -36,7 +36,7 @@ export const AnimationControls: React.FC<AnimationControlsProps> = ({
 }) => {
   const iconClassName = "sm:-ml-0.5 sm:mr-2 h-4 w-4";
   return (
-    <div className="flex space-x-1">
+    <div className="flex space-x-1 opacity-[90%]">
       <Button onClick={() => setRunning(!running)}>
         {running ? (
           <PauseIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />

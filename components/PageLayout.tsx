@@ -37,7 +37,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="h-screen flex overflow-hidden bg-gray-100">
+    <div className="h-screen flex overflow-hidden bg-gray-100 bg-gradient-to-r from-[#fcd34d] to-[#f97316]">
       <SidebarMenu
         navigation={navigation}
         sidebarOpen={sidebarOpen}
