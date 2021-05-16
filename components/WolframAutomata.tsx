@@ -1,6 +1,7 @@
 import React, { useCallback } from "react";
-import { ColorMap, drawRectCell, GridCanvas } from "./GridCanvas";
+import { ColorMap, GridCanvas } from "./GridCanvas";
 import { Cell2d, Grid2dWorld, Rule2d } from "../libs/grid2d-world";
+import { drawRectCell } from "../libs/canvas-utils";
 
 export interface WolframAutomataProps {
   rule: number;

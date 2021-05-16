@@ -5,22 +5,23 @@ export interface ColorMap {
   [state: number]: string | CanvasGradient | CanvasPattern;
 }
 
+export type DrawCell = (
+  ctx: CanvasRenderingContext2D,
+  cell: Cell2d,
+  cellWidth: number,
+  cellHeight: number,
+  padding: number
+) => void;
+
 export interface GridCanvasProps {
   cellWidth: number;
   cellHeight: number;
   rows: number;
   cols: number;
-  drawCell: (
-    ctx: CanvasRenderingContext2D,
-    cell: Cell2d,
-    cellWidth: number,
-    cellHeight: number,
-    padding: number
-  ) => void;
+  drawCell: DrawCell;
   editable: boolean;
   padding?: number;
-  onClick?: ([x, y]: [number, number]) => void;
-  cursorStyle?: string | CanvasGradient | CanvasPattern;
+  onClick?: (cell: Cell2d) => void;
 }
 
 export const GridCanvas: React.FC<GridCanvasProps> = ({
@@ -30,9 +31,8 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
   cols,
   padding = Math.round(cellWidth / 20),
   editable,
-  onClick = () => void 0,
+  onClick,
   drawCell,
-  cursorStyle = "red",
 }) => {
   let canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -40,12 +40,12 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
     const ctx = canvasRef.current?.getContext("2d");
     if (ctx != null) {
       ctx.imageSmoothingEnabled = true;
-      ctx.clearRect(0, 0, cellWidth * cols, cellHeight * rows);
       for (let x = 0; x < cols; x++) {
         for (let y = 0; y < rows; y++) {
           drawCell(ctx, [x, y], cellWidth, cellHeight, padding);
         }
       }
+      return () => ctx.clearRect(0, 0, cellWidth * cols, cellHeight * rows);
     }
   });
 
@@ -66,30 +66,9 @@ export const GridCanvas: React.FC<GridCanvasProps> = ({
       width={cellWidth * cols - padding}
       height={cellHeight * rows - padding}
       style={{ width: "100%", cursor: editable ? "crosshair" : "initial" }}
-      onClick={(ev) => {
-        if (editable) {
-          const newCursor = eventToCell(ev);
-          onClick(newCursor);
-        }
-      }}
+      onClick={
+        editable && onClick ? (ev) => onClick(eventToCell(ev)) : undefined
+      }
     />
   );
 };
-
-export function drawRectCell(
-  fillStyleFn: (cell: Cell2d) => string | CanvasGradient | CanvasPattern,
-  ctx: CanvasRenderingContext2D,
-  cell: Cell2d,
-  cellWidth: number,
-  cellHeight: number,
-  padding: number
-) {
-  const [x, y] = cell;
-  ctx.fillStyle = fillStyleFn(cell);
-  ctx.fillRect(
-    x * cellWidth,
-    y * cellHeight,
-    cellWidth - padding,
-    cellHeight - padding
-  );
-}

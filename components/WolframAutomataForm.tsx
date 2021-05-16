@@ -17,7 +17,7 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
   setState,
 }) => {
   return (
-    <div className="mb-4 bg-white overflow-hidden shadow sm:rounded-lg">
+    <div className="mb-4 bg-white overflow-hidden shadow rounded">
       <div className="flex px-4 py-5 sm:p-6 space-x-4">
         <InputField label="Rule" name="rule">
           <input

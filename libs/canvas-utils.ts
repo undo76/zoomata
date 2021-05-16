@@ -1,11 +1,16 @@
+import { Cell2d } from "./grid2d-world";
+
 export function roundedRect(
+  fillStyleFn: (cell: Cell2d) => string | CanvasGradient | CanvasPattern,
   ctx: CanvasRenderingContext2D,
-  x: any,
-  y: number,
+  cell: Cell2d,
   width: number,
   height: number,
+  padding: number,
   radius: number
 ) {
+  const [x, y] = cell;
+  ctx.fillStyle = fillStyleFn(cell);
   ctx.clearRect(x, y, width, height);
   ctx.beginPath();
   ctx.moveTo(x, y + radius);
@@ -19,3 +24,38 @@ export function roundedRect(
   ctx.arcTo(x, y, x, y + radius, radius);
   ctx.fill();
 }
+
+export function drawRectCell(
+  fillStyleFn: (cell: Cell2d) => string | CanvasGradient | CanvasPattern,
+  ctx: CanvasRenderingContext2D,
+  cell: Cell2d,
+  width: number,
+  height: number,
+  padding: number
+) {
+  const [x, y] = cell;
+  ctx.fillStyle = fillStyleFn(cell);
+  ctx.fillRect(x * width, y * height, width - padding, height - padding);
+}
+
+// export function drawCircleCell(
+//   fillStyleFn: (cell: Cell2d) => string | CanvasGradient | CanvasPattern,
+//   ctx: CanvasRenderingContext2D,
+//   cell: Cell2d,
+//   width: number,
+//   height: number,
+//   padding: number
+// ) {
+//   const [x, y] = cell;
+//   ctx.fillStyle = fillStyleFn(cell);
+//   ctx.ellipse(
+//     x * width + width / 2,
+//     y * height + height / 2,
+//     0,
+//     (width - padding) / 2,
+//     (height - padding) / 2,
+//     0,
+//     2 * Math.PI
+//   );
+//   ctx.fill();
+// }
