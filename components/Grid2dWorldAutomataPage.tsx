@@ -18,7 +18,7 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
 }) => {
   const [world, setWorld, running, setRunning] = useAnimatedIterable(
     () => new Grid2dWorld(100, 100, initFn, rule),
-    10
+    0
   );
   return (
     <PageLayout title={title}>
