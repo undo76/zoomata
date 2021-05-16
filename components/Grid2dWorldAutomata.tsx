@@ -24,8 +24,8 @@ export const Grid2dWorldAutomata: React.FC<Grid2dWorldAutomataProps> = ({
   colorMapping = ["#ddd", "#5c0707"],
   editable = false,
 }) => {
-  const fillStyleFn = ([x, y]: [number, number]) =>
-    colorMapping[world.getCellState([x, y])];
+  const fillStyleFn = (cell: Cell2d) =>
+    colorMapping[world.getCellState(cell)];
   return (
     <GridCanvas
       cellWidth={Math.round(1000 / world.width)}
