@@ -48,7 +48,10 @@ let Widget: React.FC<{
 }> = ({ title, href, children }) => {
   return (
     <Link href={href}>
-      <a href={href} className="relative block overflow-hidden p-px w-1/2">
+      <a
+        href={href}
+        className="relative block overflow-hidden p-px w-1/2 bg-white"
+      >
         <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-800 bg-opacity-75 text-white font-semibold rounded">
           {title}
         </div>
