@@ -30,7 +30,7 @@ export const SettingsPanel: React.FC<{
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
             >
-              <div className="w-screen max-w-md backdrop-filter backdrop-blur-lg">
+              <div className="w-screen max-w-xs backdrop-filter backdrop-blur-lg">
                 <div className="h-full flex flex-col py-6 bg-white bg-opacity-75 shadow-xl overflow-y-scroll ">
                   <div className="px-4 sm:px-6">
                     <div className="flex items-start justify-between">
@@ -49,9 +49,7 @@ export const SettingsPanel: React.FC<{
                     </div>
                   </div>
                   <div className="mt-6 relative flex-1 px-4 sm:px-6">
-                    {/* Replace with your content */}
                     {children}
-                    {/* /End replace */}
                   </div>
                 </div>
               </div>
