@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "../libs/class-names";
-import { ArrowRightIcon } from "@heroicons/react/outline";
 
 const iconClassName = "sm:-ml-0.5 sm:mr-2 h-4 w-4";
 

@@ -49,7 +49,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
       />
 
       <div className="flex flex-col w-0 flex-1 overflow-hidden">
-        <div className="flex items-center md:hidden pl-1 pt-1 sm:px-3 sm:py-3 bg-gray-800">
+        <div className="flex items-center md:hidden pl-1 py-1 sm:px-3 sm:py-3 bg-gray-800">
           <button
             className="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
             onClick={() => setSidebarOpen(true)}
@@ -57,7 +57,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
             <span className="sr-only">Open sidebar</span>
             <MenuIcon className="h-6 w-6" aria-hidden="true" />
           </button>
-          <h1 className="flex items-center text-3xl text-yellow-300 font-light uppercase">
+          <h1 className="flex items-center ml-1 text-3xl text-yellow-300 font-light uppercase">
             <LogoIcon className="h-6 w-6 mr-[2px]" aria-hidden="true" />
             <span aria-hidden>oomata</span>
             <span className="sr-only">Zoomata</span>
