@@ -6,6 +6,8 @@ import { AnimationControls } from "./AnimationControls";
 import React, { useCallback, useState } from "react";
 import { ColorMap } from "./GridCanvas";
 import { Grid2dWorldAutomataSettings } from "./Grid2dWorldAutomataSettings";
+import { Button } from "./Button";
+import { CogIcon } from "@heroicons/react/outline";
 
 export interface GridWorld2dAutomataPageProps {
   title: string;
@@ -31,7 +33,14 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
   );
 
   return (
-    <PageLayout title={title}>
+    <PageLayout
+      title={title}
+      actions={
+        <Button onClick={() => setSettingsOpen(true)} icon={CogIcon}>
+          <span className="hidden sm:block">Settings</span>
+        </Button>
+      }
+    >
       <div className="relative rounded overflow-hidden mb-2 p-1 shadow-lg bg-white">
         <Grid2dWorldAutomata
           world={world}
