@@ -7,6 +7,7 @@ import {
   UsersIcon,
 } from "@heroicons/react/outline";
 import { Button } from "./Button";
+import { LogoIcon } from "./LogoIcon";
 
 const defaultNavigation = [
   { name: "Gallery", href: "/", icon: HomeIcon, current: true },
@@ -56,8 +57,10 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
             <span className="sr-only">Open sidebar</span>
             <MenuIcon className="h-6 w-6" aria-hidden="true" />
           </button>
-          <h1 className="ml-2 text-3xl text-yellow-300 font-light uppercase">
-            Zoomata
+          <h1 className="flex items-center text-3xl text-yellow-300 font-light uppercase">
+            <LogoIcon className="h-6 w-6 mr-[2px]" aria-hidden="true" />
+            <span aria-hidden>oomata</span>
+            <span className="sr-only">Zoomata</span>
           </h1>
         </div>
 
