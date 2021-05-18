@@ -75,7 +75,7 @@ let Widget: React.FC<{
   href: string;
 }> = ({ title, href, children }) => {
   return (
-    <div className="p-2 w-1/3">
+    <div className="p-2 w-1/2 md:w-1/3">
       <Link href={href}>
         <a href={href} className="relative block bg-white p-1 rounded shadow">
           <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-100 bg-opacity-95 text-gray-700 font-medium rounded">
