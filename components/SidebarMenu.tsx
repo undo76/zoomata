@@ -9,8 +9,6 @@ import { useRouter } from "next/router";
 export interface MenuNavigation {
   name: string;
   href: string;
-  icon: any;
-  current: boolean;
 }
 
 export interface SidebarMenuProps {

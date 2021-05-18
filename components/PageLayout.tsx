@@ -1,28 +1,23 @@
 import React, { useState } from "react";
 import { MenuNavigation, SidebarMenu } from "./SidebarMenu";
-import {
-  FolderIcon,
-  HomeIcon,
-  MenuIcon,
-  UsersIcon,
-} from "@heroicons/react/outline";
+import { MenuIcon } from "@heroicons/react/outline";
 import { LogoIcon } from "./LogoIcon";
 import Head from "next/head";
 
 const defaultNavigation = [
-  { name: "Gallery", href: "/", icon: HomeIcon, current: true },
-  { name: "Wolfram", href: "/wolfram", icon: HomeIcon, current: false },
+  { name: "Gallery", href: "/" },
+  { name: "Wolfram", href: "/wolfram" },
   {
     name: "Self-reproducing",
     href: "/self-reproducing",
-    icon: UsersIcon,
-    current: false,
   },
   {
     name: "Game of life",
     href: "/game-of-life",
-    icon: FolderIcon,
-    current: false,
+  },
+  {
+    name: "Langton's ant",
+    href: "/langton-ant",
   },
 ];
 

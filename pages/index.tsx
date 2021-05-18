@@ -9,6 +9,7 @@ import { Grid2dWorldAutomata } from "../components/Grid2dWorldAutomata";
 import { Grid2dWorld, MutableGrid2dWorld } from "../libs/grid2d-world";
 import Link from "next/link";
 import { ColorMap } from "../components/GridCanvas";
+import { langtonAntRule } from "./langton-ant";
 
 const circleInitFn = (w: MutableGrid2dWorld) =>
   drawCircleInWorld(w, [25, 25], 3);
@@ -38,6 +39,36 @@ export default function Gallery() {
             new Grid2dWorld(50, 50, randomizeWorld, gameOfLifeRule)
           }
           colorMapping={["#ddd", "#400202"]}
+          delay={100}
+        />
+
+        <AnimatedGridWorld2Widget
+          title="Langton's ant"
+          href="/langton-ant"
+          initialState={() =>
+            new Grid2dWorld(
+              50,
+              50,
+              (w) =>
+                w.setCellState(
+                  [Math.floor(w.width / 2), Math.floor(w.height / 2)],
+                  2
+                ),
+              langtonAntRule
+            )
+          }
+          colorMapping={[
+            "#ded",
+            "#030",
+            "#f00",
+            "#f00",
+            "#f00",
+            "#f00",
+            "#f00",
+            "#f00",
+            "#f00",
+            "#f00",
+          ]}
           delay={100}
         />
       </div>
