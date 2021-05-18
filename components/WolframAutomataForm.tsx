@@ -1,5 +1,5 @@
 import { InputField } from "./InputField";
-import React, { useRef } from "react";
+import React from "react";
 
 interface FormState {
   rule: number;
@@ -17,8 +17,8 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
   setState,
 }) => {
   return (
-    <div className="mb-4 bg-white overflow-hidden shadow rounded">
-      <div className="flex px-4 py-5 sm:p-6 space-x-4">
+    <div className="flex flex-col space-y-4">
+      <div className="w-24">
         <InputField label="Rule" name="rule">
           <input
             type="number"
@@ -34,6 +34,8 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
             }
           />
         </InputField>
+      </div>
+      <div className="flex space-x-2 items-center">
         <InputField label="Width" name="width">
           <input
             type="number"

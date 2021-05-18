@@ -50,12 +50,18 @@ export class Grid2dWorld {
 
   next(): Grid2dWorld {
     const nextWorld = this.clear(true);
-    for (let x = 0; x < this.width; x++) {
-      for (let y = 0; y < this.height; y++) {
-        nextWorld.setCellState([x, y], this.rule(this, [x, y]));
-      }
+    for (let cell of this.iterate()) {
+      nextWorld.setCellState(cell, this.rule(this, cell));
     }
     return nextWorld;
+  }
+
+  *iterate(): Generator<Cell2d> {
+    for (let x = 0; x < this.width; x++) {
+      for (let y = 0; y < this.height; y++) {
+        yield [x, y];
+      }
+    }
   }
 
   getCellState(cell: Cell2d): number {

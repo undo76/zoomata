@@ -16,7 +16,7 @@ export const WolframAutomata: React.FC<WolframAutomataProps> = ({
   width,
   steps,
   editable = false,
-  colorMapping = ["#f1e5c3", "rgb(31, 41, 55)"],
+  colorMapping = ["#f6e7ba", "rgb(35,46,62)"],
 }) => {
   const world = computeSteps(rule, width, steps);
   const fillStyleFn = useCallback(
@@ -48,13 +48,21 @@ function computeSteps(rule: number, width: number, steps: number): Grid2dWorld {
   });
 }
 
+function wolfram1dNeighborhood([x, y]: Cell2d): Cell2d[] {
+  return [
+    [x - 1, y - 1],
+    [x, y - 1],
+    [x + 1, y - 1],
+  ];
+}
+
 function wolframRule(ruleNumber: number): Rule2d {
-  return (world: Grid2dWorld, [x, y]: Cell2d) => {
-    if (y === 0) return world.getCellState([x, y]);
+  return (world: Grid2dWorld, cell: Cell2d) => {
+    if (cell[1] === 0) return world.getCellState(cell);
     else {
-      const left = world.getCellState([x - 1, y - 1]);
-      const center = world.getCellState([x, y - 1]);
-      const right = world.getCellState([x + 1, y - 1]);
+      const [left, center, right] = wolfram1dNeighborhood(cell).map((n) =>
+        world.getCellState(n)
+      );
       const bitMask = 1 << ((left << 2) + (center << 1) + right);
       return +((ruleNumber & bitMask) > 0);
     }

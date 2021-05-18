@@ -23,7 +23,7 @@ function decodeState(state: State): [AntState, CellState] {
   return [state >> 1, state & 1];
 }
 
-function turn(antState: AntState, cellState: CellState) {
+function turn(antState: AntState, cellState: CellState): AntState {
   switch (antState) {
     case AntState.NONE:
       return AntState.NONE;
@@ -43,21 +43,20 @@ export function langtonAntRule(world: Grid2dWorld, cell: Cell2d): State {
   const [antState, cellState] = decodeState(state);
   switch (antState) {
     case AntState.NONE:
-      const [n, w, e, s] = vonNeumannNeighborhood(cell)
-        .map((n) => decodeState(world.getCellState(n)))
-        .map((d) => turn(...d));
+      const nbs = vonNeumannNeighborhood(cell).map((n) =>
+        turn(...decodeState(world.getCellState(n)))
+      );
+      const [n, w, e, s] = nbs;
       if (
         n === AntState.SOUTH ||
         e === AntState.WEST ||
         s === AntState.NORTH ||
         w === AntState.EAST
       ) {
-        return encodeState(
-          [n, e, s, w].find((s) => s !== AntState.NONE)!,
-          cellState
-        );
+        return encodeState(nbs.find((s) => s !== AntState.NONE)!, cellState);
+      } else {
+        return state;
       }
-      return state;
     default:
       return encodeState(AntState.NONE, cellState ^ 1);
   }
