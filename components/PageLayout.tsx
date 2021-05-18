@@ -8,8 +8,8 @@ const defaultNavigation = [
   { name: "Gallery", href: "/" },
   { name: "Wolfram", href: "/wolfram" },
   {
-    name: "Self-reproducing",
-    href: "/self-reproducing",
+    name: "Self-replicating",
+    href: "/self-replicating",
   },
   {
     name: "Game of life",

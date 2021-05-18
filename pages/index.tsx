@@ -3,7 +3,7 @@ import { WolframAutomata } from "../components/WolframAutomata";
 import { useAnimatedIterable } from "../libs/use-animated";
 import { gameOfLifeRule } from "./game-of-life";
 import { drawCircleInWorld, randomizeWorld } from "../libs/utils";
-import { selfReproducingRule } from "./self-reproducing";
+import { selfReproducingRule } from "./self-replicating";
 import React from "react";
 import { Grid2dWorldAutomata } from "../components/Grid2dWorldAutomata";
 import { Grid2dWorld, MutableGrid2dWorld } from "../libs/grid2d-world";
@@ -26,8 +26,8 @@ export default function Gallery() {
         </Widget>
 
         <AnimatedGridWorld2Widget
-          title="Self-reproducing"
-          href="/self-reproducing"
+          title="Replicating"
+          href="/self-replicating"
           initialState={() =>
             new Grid2dWorld(51, 51, circleInitFn, selfReproducingRule)
           }

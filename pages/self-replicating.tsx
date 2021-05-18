@@ -10,10 +10,10 @@ export function selfReproducingRule(world: Grid2dWorld, cell: Cell2d): State {
   );
 }
 
-export default function SelfReproducing() {
+export default function SelfReplicating() {
   return (
     <Grid2dWorldAutomataPage
-      title="Self-reproducing cellular automata"
+      title="Self-replicating"
       initFn={(w) =>
         drawCircleInWorld(
           w,
