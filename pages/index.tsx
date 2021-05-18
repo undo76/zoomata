@@ -14,21 +14,24 @@ import { langtonAntRule } from "./langton-ant";
 const circleInitFn = (w: MutableGrid2dWorld) =>
   drawCircleInWorld(w, [25, 25], 3);
 
+const singleDotInitFn = (w: MutableGrid2dWorld) =>
+  w.setCellState([Math.floor(w.width / 2), Math.floor(w.height / 2)], 2);
+
 export default function Gallery() {
   return (
     <PageLayout title="Gallery">
       <div className="flex flex-wrap">
         <Widget title="Wolfram 1D" href="/wolfram">
-          <WolframAutomata rule={30} width={50} steps={50} />
+          <WolframAutomata rule={30} width={51} steps={51} />
         </Widget>
 
         <AnimatedGridWorld2Widget
           title="Self-reproducing"
           href="/self-reproducing"
           initialState={() =>
-            new Grid2dWorld(50, 50, circleInitFn, selfReproducingRule)
+            new Grid2dWorld(51, 51, circleInitFn, selfReproducingRule)
           }
-          colorMapping={["#f6f5da", "#011936"]}
+          colorMapping={["#f1d3d7", "#011936"]}
           delay={100}
         />
 
@@ -36,7 +39,7 @@ export default function Gallery() {
           title="Game of life"
           href="/game-of-life"
           initialState={() =>
-            new Grid2dWorld(50, 50, randomizeWorld, gameOfLifeRule)
+            new Grid2dWorld(51, 51, randomizeWorld, gameOfLifeRule)
           }
           colorMapping={["#ddd", "#400202"]}
           delay={100}
@@ -46,16 +49,7 @@ export default function Gallery() {
           title="Langton's ant"
           href="/langton-ant"
           initialState={() =>
-            new Grid2dWorld(
-              50,
-              50,
-              (w) =>
-                w.setCellState(
-                  [Math.floor(w.width / 2), Math.floor(w.height / 2)],
-                  2
-                ),
-              langtonAntRule
-            )
+            new Grid2dWorld(51, 51, singleDotInitFn, langtonAntRule)
           }
           colorMapping={[
             "#ded",
@@ -81,17 +75,16 @@ let Widget: React.FC<{
   href: string;
 }> = ({ title, href, children }) => {
   return (
-    <Link href={href}>
-      <a
-        href={href}
-        className="relative block overflow-hidden p-px w-1/2 bg-white"
-      >
-        <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-800 bg-opacity-75 text-white font-semibold rounded">
-          {title}
-        </div>
-        {children}
-      </a>
-    </Link>
+    <div className="p-2 w-1/3">
+      <Link href={href}>
+        <a href={href} className="relative block bg-white p-1 rounded shadow">
+          <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-100 bg-opacity-95 text-gray-700 font-medium rounded">
+            {title}
+          </div>
+          {children}
+        </a>
+      </Link>
+    </div>
   );
 };
 

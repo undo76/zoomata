@@ -2,19 +2,6 @@ import { Cell2d, Grid2dWorld, State } from "../libs/grid2d-world";
 import { vonNeumannNeighborhood } from "../libs/utils";
 import { Grid2dWorldAutomataPage } from "../components/Grid2dWorldAutomataPage";
 
-// enum AntState {
-//   EMPTY,
-//   FULL,
-//   ANT_EMPTY_NORTH,
-//   ANT_EMPTY_EAST,
-//   ANT_EMPTY_SOUTH,
-//   ANT_EMPTY_WEST,
-//   ANT_FULL_NORTH,
-//   ANT_FULL_EAST,
-//   ANT_FULL_SOUTH,
-//   ANT_FULL_WEST,
-// }
-
 enum CellState {
   OFF,
   ON,
