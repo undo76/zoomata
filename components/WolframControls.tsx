@@ -14,8 +14,8 @@ interface WolframControlsProps {
 export const WolframControls: React.FC<WolframControlsProps> = React.memo(
   ({ rule, onPrevious, onNext, minRule, maxRule }) => {
     return (
-      <div className="flex space-x-1 opacity-[95%]">
-        <div className="mr-2 px-2 py-1 bg-gray-700 text-gray-300 text-xl font-semibold rounded">
+      <div className="flex space-x-1 justify-between opacity-[95%]">
+        <div className="mr-2 px-2 py-1 bg-amber-500 text-amber-100 text-xl text-center font-semibold rounded border-gray-100 w-16">
           {rule}
         </div>
         <ButtonGroup>

@@ -26,7 +26,7 @@ export default function Wolfram() {
     >
       <div className="relative rounded overflow-hidden p-1 shadow-lg bg-white">
         <WolframAutomata rule={rule} width={width} steps={steps} />
-        <div className="absolute bottom-2 left-2">
+        <div className="absolute top-2 left-2 right-2">
           <WolframControls
             rule={rule}
             minRule={0}
