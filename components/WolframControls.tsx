@@ -20,12 +20,12 @@ export const WolframControls: React.FC<WolframControlsProps> = React.memo(
         </div>
         <ButtonGroup>
           <Button onClick={onPrevious} disabled={rule <= minRule}>
-            <span className="sr-only">Undo</span>
+            <span className="sr-only">Previous</span>
             <ChevronLeftIcon className="h-4 w-4" aria-hidden="true" />
           </Button>
 
           <Button onClick={onNext} disabled={rule >= maxRule}>
-            <span className="sr-only">Redo</span>
+            <span className="sr-only">Next</span>
             <ChevronRightIcon className="h-4 w-4" aria-hidden="true" />
           </Button>
         </ButtonGroup>

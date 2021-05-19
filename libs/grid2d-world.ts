@@ -21,27 +21,30 @@ export class Grid2dWorld {
   ) {
     this.grid = new Uint8Array(width * height);
     if (initialize) this.initFn((this as unknown) as MutableGrid2dWorld);
+    this.history.add(this);
   }
 
-  clear(keepHistory: boolean = true): Grid2dWorld {
-    const newWorld = new Grid2dWorld(
+  private newWorld(keepHistory: boolean, initialize: boolean): Grid2dWorld {
+    return new Grid2dWorld(
       this.width,
       this.height,
       this.initFn,
       this.rule,
       keepHistory ? this.history : undefined,
-      false
+      initialize
     );
-    if (keepHistory) newWorld.history.add(newWorld);
-    return newWorld;
+  }
+
+  clear(): Grid2dWorld {
+    return this.newWorld(true, false);
   }
 
   reset(): Grid2dWorld {
-    return this.clear(false).mutate(this.initFn);
+    return this.newWorld(false, true);
   }
 
   clone(): Grid2dWorld {
-    const cloned = this.clear(true);
+    const cloned = this.newWorld(true, false);
     cloned.grid.set(this.grid);
     return cloned;
   }
@@ -102,6 +105,7 @@ class UndoHistory<T> {
     this.items[this.current] = item;
     this.size = Math.min(this.capacity, this.size + 1);
     this.last = this.current;
+    console.log(this);
   }
 
   public undo(): T {
@@ -109,6 +113,7 @@ class UndoHistory<T> {
       this.current = mod(this.current - 1, this.capacity);
       this.size = Math.max(0, this.size - 1);
     }
+    console.log(this);
     return this.items[this.current];
   }
 
@@ -117,6 +122,7 @@ class UndoHistory<T> {
       this.current = mod(this.current + 1, this.capacity);
       this.size = Math.min(this.capacity, this.size + 1);
     }
+    console.log(this);
     return this.items[this.current];
   }
 
