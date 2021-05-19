@@ -3,24 +3,20 @@ import { Cell2d, MutableGrid2dWorld, State } from "./grid2d-world";
 type Patch2d = (State | null)[][];
 
 export function randomizeWorld(world: MutableGrid2dWorld) {
-  for (let x = 0; x < world.width; x++) {
-    for (let y = 0; y < world.height; y++) {
-      world.setCellState([x, y], +(Math.random() > 0.5));
-    }
+  for (const cell of world.iterate()) {
+    world.setCellState(cell, +(Math.random() > 0.5));
   }
 }
 
 export function drawCircleInWorld(
   world: MutableGrid2dWorld,
   [cx, cy]: Cell2d,
-  radius: number
+  radius: number,
+  state: State = 1
 ) {
-  for (let x = 0; x < world.width; x++) {
-    for (let y = 0; y < world.height; y++) {
-      world.setCellState(
-        [x, y],
-        +((x - cx) ** 2 + (y - cy) ** 2 <= radius ** 2)
-      );
+  for (const [x, y] of world.iterate()) {
+    if ((x - cx) ** 2 + (y - cy) ** 2 <= radius ** 2) {
+      world.setCellState([x, y], state);
     }
   }
 }
@@ -30,12 +26,10 @@ export function drawPatchInWorld(
   patch: Patch2d,
   [minX, minY]: Cell2d
 ) {
-  for (let y = 0; y < patch.length; y++) {
-    for (let x = 0; x < patch[y].length; x++) {
-      let stateValue = patch[y][x];
-      if (stateValue !== null) {
-        world.setCellState([x + minX, y + minY], stateValue);
-      }
+  for (const [x, y] of world.iterate()) {
+    let stateValue = patch[y][x];
+    if (stateValue !== null) {
+      world.setCellState([x + minX, y + minY], stateValue);
     }
   }
 }
