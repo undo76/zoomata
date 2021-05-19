@@ -29,7 +29,7 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
             onChange={(ev) =>
               setState({
                 ...state,
-                rule: parseInt(ev.target.value, 10),
+                rule: parseInt(ev.target.value, 10) || 0,
               })
             }
           />
@@ -46,7 +46,7 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
             onChange={(ev) =>
               setState({
                 ...state,
-                width: parseInt(ev.target.value, 10),
+                width: parseInt(ev.target.value, 10) || 0,
               })
             }
           />
@@ -61,7 +61,7 @@ export const WolframAutomataForm: React.FC<WolframAutomataFormProps> = ({
             onChange={(ev) =>
               setState({
                 ...state,
-                steps: parseInt(ev.target.value, 10),
+                steps: parseInt(ev.target.value, 10) || 0,
               })
             }
           />

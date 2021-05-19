@@ -27,7 +27,7 @@ export const Grid2dWorldAutomataSettings: React.FC<Grid2dWorldAutomataSettingsPr
                 value={width}
                 onChange={(ev) =>
                   setWorld((world) => {
-                    const width = parseInt(ev.target.value, 10);
+                    const width = parseInt(ev.target.value, 10) || 1;
                     return new Grid2dWorld(
                       width,
                       world.height,
@@ -47,7 +47,7 @@ export const Grid2dWorldAutomataSettings: React.FC<Grid2dWorldAutomataSettingsPr
                 value={height}
                 onChange={(ev) =>
                   setWorld((world) => {
-                    const height = parseInt(ev.target.value, 10);
+                    const height = parseInt(ev.target.value, 10) || 1;
                     return new Grid2dWorld(
                       world.width,
                       height,
@@ -67,7 +67,7 @@ export const Grid2dWorldAutomataSettings: React.FC<Grid2dWorldAutomataSettingsPr
                 min={0}
                 max={10000}
                 value={delay}
-                onChange={(ev) => setDelay(parseInt(ev.target.value, 10))}
+                onChange={(ev) => setDelay(parseInt(ev.target.value, 10) || 0)}
               />
             </InputField>
           </div>
