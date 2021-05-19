@@ -59,25 +59,34 @@ function forward(antState: AntState, [x, y]: Cell2d): Cell2d {
   }
 }
 
+function findAnt(
+  world: Grid2dWorld
+): [Cell2d, AntState, CellState] | undefined {
+  for (const cell of world.iterate()) {
+    const [antState, cellState] = decodeState(world.getCellState(cell));
+    if (antState !== AntState.NONE) {
+      return [cell, antState, cellState];
+    }
+  }
+}
+
 export const langtonAntRule = (
   current: Grid2dWorld,
   draft: MutableGrid2dWorld
 ) => {
-  for (const cell of current.iterate()) {
-    const [antState, cellState] = decodeState(current.getCellState(cell));
-    if (antState !== AntState.NONE) {
-      const nextAntState = turn(antState, cellState);
-      const nextAntCell = forward(nextAntState, cell);
-      const [_, nextAntCellState] = decodeState(
-        current.getCellState(nextAntCell)
-      );
-      draft.setCellState(cell, encodeState(AntState.NONE, cellState ^ 1));
-      draft.setCellState(
-        nextAntCell,
-        encodeState(nextAntState, nextAntCellState)
-      );
-      return; // Just one ant in the world
-    }
+  const ant = findAnt(current);
+  if (ant) {
+    const [antCell, antState, cellState] = ant;
+    const nextAntState = turn(antState, cellState);
+    const nextAntCell = forward(nextAntState, antCell);
+    const [_, nextAntCellState] = decodeState(
+      current.getCellState(nextAntCell)
+    );
+    draft.setCellState(antCell, encodeState(AntState.NONE, cellState ^ 1));
+    draft.setCellState(
+      nextAntCell,
+      encodeState(nextAntState, nextAntCellState)
+    );
   }
 };
 
