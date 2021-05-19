@@ -1,14 +1,16 @@
-import { Cell2d, Grid2dWorld, State } from "../libs/grid2d-world";
+import { Cell2d, cellRule, Grid2dWorld, State } from "../libs/grid2d-world";
 import { drawCircleInWorld, vonNeumannNeighborhood } from "../libs/utils";
 import { Grid2dWorldAutomataPage } from "../components/Grid2dWorldAutomataPage";
 
-export function selfReproducingRule(world: Grid2dWorld, cell: Cell2d): State {
-  return (
-    vonNeumannNeighborhood(cell)
-      .map((c) => world.getCellState(c))
-      .reduce((sum, current) => sum + current, 0) % 2
-  );
-}
+export const selfReproducingRule = cellRule(
+  (world: Grid2dWorld, cell: Cell2d): State => {
+    return (
+      vonNeumannNeighborhood(cell)
+        .map((c) => world.getCellState(c))
+        .reduce((sum, current) => sum + current, 0) % 2
+    );
+  }
+);
 
 export default function SelfReplicating() {
   return (

@@ -1,5 +1,10 @@
 import { useAnimatedIterable } from "../libs/use-animated";
-import { Grid2dWorld, MutableGrid2dWorld, Rule2d } from "../libs/grid2d-world";
+import {
+  Grid2dWorld,
+  MutableGrid2dWorld,
+  CellRule2d,
+  WorldRule2d,
+} from "../libs/grid2d-world";
 import { PageLayout } from "./PageLayout";
 import { Grid2dWorldAutomata } from "./Grid2dWorldAutomata";
 import { AnimationControls } from "./AnimationControls";
@@ -12,7 +17,7 @@ import { CogIcon } from "@heroicons/react/outline";
 export interface GridWorld2dAutomataPageProps {
   title: string;
   initFn: (w: MutableGrid2dWorld) => void;
-  rule: Rule2d;
+  rule: WorldRule2d;
   initialDelay?: number;
   initialColorMapping?: ColorMap;
 }

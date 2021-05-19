@@ -2,7 +2,11 @@ import { mod } from "./utils";
 
 export type State = number;
 export type Cell2d = [number, number];
-export type Rule2d = (world: Grid2dWorld, cell: Cell2d) => State;
+export type CellRule2d = (world: Grid2dWorld, cell: Cell2d) => State;
+export type WorldRule2d = (
+  current: Grid2dWorld,
+  draft: MutableGrid2dWorld
+) => void;
 
 export class Grid2dWorld {
   private readonly grid: Uint8Array;
@@ -11,7 +15,7 @@ export class Grid2dWorld {
     public readonly width: number,
     public readonly height: number,
     public readonly initFn: (world: MutableGrid2dWorld) => void = () => {},
-    public readonly rule: Rule2d,
+    public readonly rule: WorldRule2d,
     public readonly history = new UndoHistory<Grid2dWorld>(1000),
     initialize = true
   ) {
@@ -49,16 +53,12 @@ export class Grid2dWorld {
   }
 
   next(): Grid2dWorld {
-    const nextWorld = this.clear(true);
-    for (let cell of this.iterate()) {
-      nextWorld.setCellState(cell, this.rule(this, cell));
-    }
-    return nextWorld;
+    return this.mutate((draft) => this.rule(this, draft));
   }
 
   *iterate(): Generator<Cell2d> {
-    for (let x = 0; x < this.width; x++) {
-      for (let y = 0; y < this.height; y++) {
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
         yield [x, y];
       }
     }
@@ -127,4 +127,12 @@ class UndoHistory<T> {
   public canRedo() {
     return this.current !== this.last;
   }
+}
+
+export function cellRule(cellRule: CellRule2d) {
+  return function (current: Grid2dWorld, draft: MutableGrid2dWorld) {
+    for (let cell of current.iterate()) {
+      draft.setCellState(cell, cellRule(current, cell));
+    }
+  };
 }

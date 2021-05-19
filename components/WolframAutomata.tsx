@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { ColorMap, GridCanvas } from "./GridCanvas";
-import { Cell2d, Grid2dWorld, Rule2d } from "../libs/grid2d-world";
+import { Cell2d, CellRule2d, Grid2dWorld } from "../libs/grid2d-world";
 import { drawRectCell } from "../libs/canvas-utils";
 
 export interface WolframAutomataProps {
@@ -36,14 +36,23 @@ export const WolframAutomata: React.FC<WolframAutomataProps> = ({
   );
 };
 
-function computeSteps(rule: number, width: number, steps: number): Grid2dWorld {
-  const world = new Grid2dWorld(width, steps, undefined, wolframRule(rule));
+function computeSteps(
+  ruleNumber: number,
+  width: number,
+  steps: number
+): Grid2dWorld {
+  const world = new Grid2dWorld(
+    width,
+    steps,
+    (draft) => {
+      draft.setCellState([Math.floor(width / 2), 0], 1);
+    },
+    () => {}
+  );
+  const rule = wolframRule(ruleNumber);
   return world.mutate((draft) => {
-    draft.setCellState([Math.floor(width / 2), 0], 1);
-    for (let y = 0; y < steps; y++) {
-      for (let x = 0; x < width; x++) {
-        draft.setCellState([x, y], draft.rule(draft, [x, y]));
-      }
+    for (const cell of draft.iterate()) {
+      draft.setCellState(cell, rule(draft, cell));
     }
   });
 }
@@ -56,7 +65,7 @@ function wolfram1dNeighborhood([x, y]: Cell2d): Cell2d[] {
   ];
 }
 
-function wolframRule(ruleNumber: number): Rule2d {
+function wolframRule(ruleNumber: number): CellRule2d {
   return (world: Grid2dWorld, cell: Cell2d) => {
     if (cell[1] === 0) return world.getCellState(cell);
     else {

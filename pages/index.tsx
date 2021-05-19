@@ -1,6 +1,9 @@
 import { PageLayout } from "../components/PageLayout";
 import { WolframAutomata } from "../components/WolframAutomata";
-import { useAnimatedIterable } from "../libs/use-animated";
+import {
+  useAnimatedIterable,
+  useAnimatedRandomValue,
+} from "../libs/use-animated";
 import { gameOfLifeRule } from "./game-of-life";
 import { drawCircleInWorld, randomizeWorld } from "../libs/utils";
 import { selfReproducingRule } from "./self-replicating";
@@ -18,11 +21,13 @@ const singleDotInitFn = (w: MutableGrid2dWorld) =>
   w.setCellState([Math.floor(w.width / 2), Math.floor(w.height / 2)], 2);
 
 export default function Gallery() {
+  const [wolframRule] = useAnimatedRandomValue(256, 30, 1000);
+
   return (
     <PageLayout title="Gallery">
       <div className="flex flex-wrap">
         <Widget title="Wolfram 1D" href="/wolfram">
-          <WolframAutomata rule={30} width={51} steps={51} />
+          <WolframAutomata rule={wolframRule} width={51} steps={51} />
         </Widget>
 
         <AnimatedGridWorld2Widget

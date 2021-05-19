@@ -3,6 +3,7 @@ import {
   SetStateAction,
   useCallback,
   useEffect,
+  useReducer,
   useRef,
   useState,
 } from "react";
@@ -42,4 +43,16 @@ export function useAnimatedIterable<S extends { next: () => S }>(
     initialRunning
   );
   return [state, setState, running, setRunning];
+}
+
+export function useAnimatedRandomValue(
+  maximum: number,
+  initialValue: number,
+  delay: number
+): [number, boolean, (r: boolean) => void] {
+  const [value, newRandomValue] = useReducer(
+    () => Math.floor(Math.random() * maximum),
+    initialValue
+  );
+  return [value, ...useAnimated(newRandomValue, delay)];
 }
