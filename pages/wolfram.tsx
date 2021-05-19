@@ -5,6 +5,7 @@ import { WolframAutomataForm } from "../components/WolframAutomataForm";
 import { SettingsPanel } from "../components/SettingsPanel";
 import { Button } from "../components/Button";
 import { CogIcon } from "@heroicons/react/outline";
+import { WolframControls } from "../components/WolframControls";
 
 export default function Wolfram() {
   let [state, setState] = useState({
@@ -23,8 +24,27 @@ export default function Wolfram() {
         </Button>
       }
     >
-      <div className="rounded overflow-hidden p-1 shadow-lg bg-white">
+      <div className="relative rounded overflow-hidden p-1 shadow-lg bg-white">
         <WolframAutomata rule={rule} width={width} steps={steps} />
+        <div className="absolute bottom-2 left-2">
+          <WolframControls
+            rule={rule}
+            minRule={0}
+            maxRule={255}
+            onPrevious={() =>
+              setState(({ rule, ...state }) => ({
+                ...state,
+                rule: rule - 1,
+              }))
+            }
+            onNext={() =>
+              setState(({ rule, ...state }) => ({
+                ...state,
+                rule: rule + 1,
+              }))
+            }
+          />
+        </div>
       </div>
       <SettingsPanel
         title="Settings"
