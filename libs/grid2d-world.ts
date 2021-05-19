@@ -105,7 +105,6 @@ class UndoHistory<T> {
     this.items[this.current] = item;
     this.size = Math.min(this.capacity, this.size + 1);
     this.last = this.current;
-    console.log(this);
   }
 
   public undo(): T {
@@ -113,7 +112,6 @@ class UndoHistory<T> {
       this.current = mod(this.current - 1, this.capacity);
       this.size = Math.max(0, this.size - 1);
     }
-    console.log(this);
     return this.items[this.current];
   }
 
@@ -122,7 +120,6 @@ class UndoHistory<T> {
       this.current = mod(this.current + 1, this.capacity);
       this.size = Math.min(this.capacity, this.size + 1);
     }
-    console.log(this);
     return this.items[this.current];
   }
 
