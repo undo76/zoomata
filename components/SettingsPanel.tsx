@@ -31,15 +31,15 @@ export const SettingsPanel: React.FC<{
               leaveTo="translate-x-full"
             >
               <div className="w-screen max-w-xs backdrop-filter backdrop-blur-lg">
-                <div className="h-full flex flex-col py-6 bg-white bg-opacity-75 shadow-xl overflow-y-scroll ">
+                <div className="h-full flex flex-col py-6 bg-gray-100 bg-opacity-[85%] shadow-xl overflow-y-scroll ">
                   <div className="px-4 sm:px-6">
                     <div className="flex items-start justify-between">
-                      <Dialog.Title className="text-lg font-medium text-gray-900">
+                      <Dialog.Title className="text-lg font-medium text-gray-500 uppercase">
                         {title}
                       </Dialog.Title>
                       <div className="ml-3 h-7 flex items-center">
                         <button
-                          className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                          className="bg-transparent rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-indigo-500"
                           onClick={() => setOpen(false)}
                         >
                           <span className="sr-only">Close panel</span>

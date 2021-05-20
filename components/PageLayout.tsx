@@ -40,7 +40,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
       <Head>
         <title>Zoomata :: {title}</title>
       </Head>
-      <div className="h-screen flex overflow-hidden bg-gray-100 ">
+      <div className="h-screen flex overflow-hidden">
         <SidebarMenu
           navigation={navigation}
           sidebarOpen={sidebarOpen}
@@ -63,7 +63,7 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
             </h1>
           </div>
 
-          <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none bg-gradient-to-r from-[#fcd34d] to-[#f97316]">
+          <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none bg-gradient-to-b from-gray-200 to-gray-300">
             <div className="py-6">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 <div className="flex justify-between">
