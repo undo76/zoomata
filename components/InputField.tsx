@@ -19,19 +19,19 @@ export const InputField: React.FC<{
   id = name,
   labelClassName = defaultLabelClassName,
   inputWrapperClassName = defaultInputWrapperClassName,
-  inputClassName = defaultInputClassName,
   children,
 }) => {
+  const child = React.Children.only(children);
   return (
     <div>
       <label htmlFor={id} className={labelClassName}>
         {label}
       </label>
       <div className={inputWrapperClassName}>
-        {React.cloneElement(React.Children.only(children), {
+        {React.cloneElement(child, {
           id,
           name,
-          className: inputClassName,
+          className: child.props.className || defaultInputClassName,
         })}
       </div>
     </div>

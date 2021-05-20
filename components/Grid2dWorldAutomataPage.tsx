@@ -27,7 +27,7 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
   initFn,
   rule,
   initialDelay = 50,
-  initialColorMapping = ["#ddd", "#2d0000"],
+  initialColorMapping = ["#dddddd", "#2d0000"],
 }) => {
   const [delay, setDelay] = useState(initialDelay);
   const [colorMapping, setColorMapping] = useState(() => initialColorMapping);
@@ -82,6 +82,8 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
         setWorld={setWorld}
         delay={delay}
         setDelay={setDelay}
+        colorMapping={colorMapping}
+        setColorMapping={setColorMapping}
       />
     </PageLayout>
   );

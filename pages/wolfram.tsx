@@ -1,19 +1,17 @@
 import { WolframAutomata } from "../components/WolframAutomata";
 import { PageLayout } from "../components/PageLayout";
 import React, { useState } from "react";
-import { WolframAutomataForm } from "../components/WolframAutomataForm";
+import { WolframAutomataSettings } from "../components/WolframAutomataSettings";
 import { SettingsPanel } from "../components/SettingsPanel";
 import { Button } from "../components/Button";
 import { CogIcon } from "@heroicons/react/outline";
 import { WolframControls } from "../components/WolframControls";
 
 export default function Wolfram() {
-  let [state, setState] = useState({
-    rule: 110,
-    width: 100,
-    steps: 100,
-  });
-  const { rule, width, steps } = state;
+  const [rule, setRule] = useState(30);
+  const [width, setWidth] = useState(100);
+  const [steps, setSteps] = useState(100);
+  const [colorMapping, setColorMapping] = useState(["#eeeeee", "#000000"]);
   const [settingsOpen, setSettingsOpen] = useState(false);
   return (
     <PageLayout
@@ -25,24 +23,19 @@ export default function Wolfram() {
       }
     >
       <div className="relative rounded overflow-hidden p-1 shadow-lg bg-white">
-        <WolframAutomata rule={rule} width={width} steps={steps} />
+        <WolframAutomata
+          rule={rule}
+          width={width}
+          steps={steps}
+          colorMapping={colorMapping}
+        />
         <div className="absolute top-2 left-2 right-2">
           <WolframControls
             rule={rule}
             minRule={0}
             maxRule={255}
-            onPrevious={() =>
-              setState(({ rule, ...state }) => ({
-                ...state,
-                rule: rule - 1,
-              }))
-            }
-            onNext={() =>
-              setState(({ rule, ...state }) => ({
-                ...state,
-                rule: rule + 1,
-              }))
-            }
+            onPrevious={() => setRule((rule) => rule - 1)}
+            onNext={() => setRule((rule) => rule + 1)}
           />
         </div>
       </div>
@@ -51,7 +44,16 @@ export default function Wolfram() {
         open={settingsOpen}
         setOpen={setSettingsOpen}
       >
-        <WolframAutomataForm state={state} setState={setState} />
+        <WolframAutomataSettings
+          rule={rule}
+          width={width}
+          steps={steps}
+          colorMapping={colorMapping}
+          setRule={setRule}
+          setWidth={setWidth}
+          setSteps={setSteps}
+          setColorMapping={setColorMapping}
+        />
       </SettingsPanel>
     </PageLayout>
   );

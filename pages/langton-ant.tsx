@@ -128,16 +128,16 @@ export default function LangtonAnt() {
         )
       }
       initialColorMapping={[
-        "#ddd",
-        "#222",
-        "#f00",
-        "#f00",
-        "#f00",
-        "#f00",
-        "#f00",
-        "#f00",
-        "#f00",
-        "#f00",
+        "#dddddd",
+        "#222222",
+        "#ff0000",
+        "#ff0000",
+        "#ff0000",
+        "#ff0000",
+        "#ff0000",
+        "#ff0000",
+        "#ff0000",
+        "#ff0000",
       ]}
       rule={langtonAntRule}
     />

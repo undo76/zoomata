@@ -1,9 +1,7 @@
 import React, { MouseEvent, useEffect, useRef } from "react";
 import { Cell2d } from "../libs/grid2d-world";
 
-export interface ColorMap {
-  [state: number]: string | CanvasGradient | CanvasPattern;
-}
+export type ColorMap = string[];
 
 export type DrawCell = (
   ctx: CanvasRenderingContext2D,
