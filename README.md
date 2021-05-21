@@ -1,6 +1,8 @@
 # Zoomata
 
-Cellular automata zoo. Next.js + Typescript + Tailwindcss
+Cellular automata zoo. https://zoomata.undo76.net
+
+Next.js + Typescript + Tailwindcss.
 
 ## Installation
 
@@ -13,6 +15,7 @@ or
 `npm run build`
 or
 `yarn run build`
+
 
 
 
