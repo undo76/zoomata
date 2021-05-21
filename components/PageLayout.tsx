@@ -3,6 +3,7 @@ import { MenuNavigation, SidebarMenu } from "./SidebarMenu";
 import { MenuIcon } from "@heroicons/react/outline";
 import { LogoIcon } from "./LogoIcon";
 import Head from "next/head";
+import classNames from "../libs/class-names";
 
 const defaultNavigation = [
   { name: "Gallery", href: "/" },
@@ -25,12 +26,14 @@ interface PageLayoutProps {
   title: React.ReactNode;
   actions?: React.ReactNode;
   navigation?: MenuNavigation[];
+  mainBackgroundClassName?: string;
 }
 
 export const PageLayout: React.FC<PageLayoutProps> = ({
   navigation = defaultNavigation,
   title,
   actions,
+  mainBackgroundClassName = "bg-gradient-to-b from-gray-200 to-gray-300",
   children,
 }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -63,7 +66,12 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
             </h1>
           </div>
 
-          <main className="flex-1 relative z-0 overflow-y-auto focus:outline-none bg-gradient-to-b from-gray-200 to-gray-300">
+          <main
+            className={classNames(
+              "flex-1 relative z-0 overflow-y-auto focus:outline-none transition-colors duration-1000",
+              mainBackgroundClassName
+            )}
+          >
             <div className="py-6">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 <div className="flex justify-between">
