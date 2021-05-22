@@ -62,7 +62,7 @@ function forward(antState: AntState, [x, y]: Cell2d): Cell2d {
 function findAnt(
   world: Grid2dWorld
 ): [Cell2d, AntState, CellState] | undefined {
-  for (const cell of world.iterate()) {
+  for (const cell of world) {
     const [antState, cellState] = decodeState(world.getCellState(cell));
     if (antState !== AntState.NONE) {
       return [cell, antState, cellState];

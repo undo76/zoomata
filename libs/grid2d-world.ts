@@ -8,7 +8,7 @@ export type WorldRule2d = (
   draft: MutableGrid2dWorld
 ) => void;
 
-export class Grid2dWorld {
+export class Grid2dWorld implements Iterable<Cell2d> {
   private readonly grid: Uint8Array;
 
   constructor(
@@ -22,6 +22,10 @@ export class Grid2dWorld {
     this.grid = new Uint8Array(width * height);
     if (initialize) this.initFn((this as unknown) as MutableGrid2dWorld);
     this.history.add(this);
+  }
+
+  [Symbol.iterator](): Iterator<Cell2d, any, undefined> {
+    return this.iterate();
   }
 
   private newWorld(keepHistory: boolean, initialize: boolean): Grid2dWorld {
@@ -59,7 +63,7 @@ export class Grid2dWorld {
     return this.mutate((draft) => this.rule(this, draft));
   }
 
-  *iterate(): Generator<Cell2d> {
+  private *iterate(): Generator<Cell2d> {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         yield [x, y];

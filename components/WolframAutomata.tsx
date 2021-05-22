@@ -51,7 +51,7 @@ function computeSteps(
   );
   const rule = wolframRule(ruleNumber);
   return world.mutate((draft) => {
-    for (const cell of draft.iterate()) {
+    for (const cell of draft) {
       draft.setCellState(cell, rule(draft, cell));
     }
   });

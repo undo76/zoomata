@@ -3,7 +3,7 @@ import { Cell2d, MutableGrid2dWorld, State } from "./grid2d-world";
 type Patch2d = (State | null)[][];
 
 export function randomizeWorld(world: MutableGrid2dWorld) {
-  for (const cell of world.iterate()) {
+  for (const cell of world) {
     world.setCellState(cell, +(Math.random() > 0.5));
   }
 }
@@ -14,7 +14,7 @@ export function drawCircleInWorld(
   radius: number,
   state: State = 1
 ) {
-  for (const [x, y] of world.iterate()) {
+  for (const [x, y] of world) {
     if ((x - cx) ** 2 + (y - cy) ** 2 <= radius ** 2) {
       world.setCellState([x, y], state);
     }
@@ -26,7 +26,7 @@ export function drawPatchInWorld(
   patch: Patch2d,
   [minX, minY]: Cell2d
 ) {
-  for (const [x, y] of world.iterate()) {
+  for (const [x, y] of world) {
     let stateValue = patch[y][x];
     if (stateValue !== null) {
       world.setCellState([x + minX, y + minY], stateValue);
