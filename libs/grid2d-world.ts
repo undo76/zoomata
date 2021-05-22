@@ -24,7 +24,7 @@ export class Grid2dWorld implements Iterable<Cell2d> {
     this.history.add(this);
   }
 
-  [Symbol.iterator](): Iterator<Cell2d, any, undefined> {
+  [Symbol.iterator](): Iterator<Cell2d> {
     return this.iterate();
   }
 
