@@ -2,7 +2,6 @@ import { useAnimatedIterable } from "../libs/use-animated";
 import {
   Grid2dWorld,
   MutableGrid2dWorld,
-  CellRule2d,
   WorldRule2d,
 } from "../libs/grid2d-world";
 import { PageLayout } from "./PageLayout";
@@ -11,8 +10,7 @@ import { AnimationControls } from "./AnimationControls";
 import React, { useCallback, useState } from "react";
 import { ColorMap } from "./GridCanvas";
 import { Grid2dWorldAutomataSettings } from "./Grid2dWorldAutomataSettings";
-import { Button } from "./Button";
-import { CogIcon } from "@heroicons/react/outline";
+import { AdjustmentsIcon } from "@heroicons/react/outline";
 
 export interface GridWorld2dAutomataPageProps {
   title: string;
@@ -41,9 +39,10 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
     <PageLayout
       title={title}
       actions={
-        <Button onClick={() => setSettingsOpen(true)} icon={CogIcon}>
-          <span className="hidden sm:block">Settings</span>
-        </Button>
+        <button className="h-8 w-8" onClick={() => setSettingsOpen(true)}>
+          <AdjustmentsIcon className="stroke-current text-gray-400 hover:text-gray-500" />
+          <span className="sr-only">Settings</span>
+        </button>
       }
     >
       <div className="relative rounded overflow-hidden mb-2 p-1 shadow-lg bg-white">

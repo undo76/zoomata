@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { WolframAutomataSettings } from "../components/WolframAutomataSettings";
 import { SettingsPanel } from "../components/SettingsPanel";
 import { Button } from "../components/Button";
-import { CogIcon } from "@heroicons/react/outline";
+import { AdjustmentsIcon, CogIcon } from "@heroicons/react/outline";
 import { WolframControls } from "../components/WolframControls";
 
 export default function Wolfram() {
@@ -17,9 +17,10 @@ export default function Wolfram() {
     <PageLayout
       title="Wolfram"
       actions={
-        <Button onClick={() => setSettingsOpen(true)} icon={CogIcon}>
-          <span className="hidden sm:block">Settings</span>
-        </Button>
+        <button className="h-8 w-8" onClick={() => setSettingsOpen(true)}>
+          <AdjustmentsIcon className="stroke-current text-gray-400 hover:text-gray-500" />
+          <span className="sr-only">Settings</span>
+        </button>
       }
     >
       <div className="relative rounded overflow-hidden p-1 shadow-lg bg-white">

@@ -17,7 +17,7 @@ export const Button: React.FC<
     repeatDelay?: number;
   }
 > = ({ children, icon, onClick, repeatDelay = 200, ...props }) => {
-  const Icon: any = icon;
+  const Icon = icon!;
   const [, setRepeating] = useAnimated(onClick, repeatDelay, false);
   useEffect(() => {
     if (props.disabled) setRepeating(false);
