@@ -25,7 +25,7 @@ export default function Gallery() {
 
   return (
     <PageLayout title="Gallery">
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         <Widget title="Wolfram 1D" href="/wolfram">
           <WolframAutomata rule={wolframRule} width={51} steps={51} />
         </Widget>
@@ -80,19 +80,17 @@ let Widget: React.FC<{
   href: string;
 }> = ({ title, href, children }) => {
   return (
-    <div className="p-2 w-1/2 md:w-1/3">
-      <Link href={href}>
-        <a
-          href={href}
-          className="relative block bg-white p-1 rounded shadow transition-shadow transition-transform transform scale-100 hover:shadow-lg hover:scale-105"
-        >
-          <div className="absolute top-2 left-2 p-0.5 px-2 bg-gray-100 bg-opacity-95 text-gray-700 font-medium rounded">
-            {title}
-          </div>
-          {children}
-        </a>
-      </Link>
-    </div>
+    <Link href={href}>
+      <a
+        href={href}
+        className="relative block bg-white p-1 rounded shadow transition transform scale-100 hover:shadow-lg hover:scale-[1.03]"
+      >
+        <div className="absolute top-2 left-2 p-0.5 px-2 text-gray-100 bg-opacity-95 bg-gray-600 font-light uppercase rounded-sm">
+          {title}
+        </div>
+        {children}
+      </a>
+    </Link>
   );
 };
 

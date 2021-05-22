@@ -22,7 +22,6 @@ interface AnimationControlsProps {
   onClear: () => void;
   onUndo: () => void;
   onRedo: () => void;
-  onSettings: () => void;
 }
 
 export const AnimationControls: React.FC<AnimationControlsProps> = React.memo(
@@ -36,10 +35,9 @@ export const AnimationControls: React.FC<AnimationControlsProps> = React.memo(
     onClear,
     onUndo,
     onRedo,
-    onSettings,
   }) => {
     return (
-      <div className="flex space-x-1 opacity-[95%]">
+      <div className="flex space-x-1">
         <Button onClick={() => setRunning(!running)}>
           {running ? (
             <PauseIcon className="-ml-0.5 mr-2 h-4 w-4" aria-hidden="true" />

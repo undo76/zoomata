@@ -17,8 +17,8 @@ export default function Wolfram() {
     <PageLayout
       title="Wolfram"
       actions={
-        <button className="h-8 w-8" onClick={() => setSettingsOpen(true)}>
-          <AdjustmentsIcon className="stroke-current text-gray-400 hover:text-gray-500" />
+        <button onClick={() => setSettingsOpen(true)}>
+          <AdjustmentsIcon className="stroke-current h-8 w-8 text-gray-400 hover:text-gray-500" />
           <span className="sr-only">Settings</span>
         </button>
       }

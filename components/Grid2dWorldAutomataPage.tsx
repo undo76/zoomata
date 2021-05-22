@@ -39,8 +39,8 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
     <PageLayout
       title={title}
       actions={
-        <button className="h-8 w-8" onClick={() => setSettingsOpen(true)}>
-          <AdjustmentsIcon className="stroke-current text-gray-400 hover:text-gray-500" />
+        <button onClick={() => setSettingsOpen(true)}>
+          <AdjustmentsIcon className="stroke-current h-8 text-gray-400 hover:text-gray-500" />
           <span className="sr-only">Settings</span>
         </button>
       }
@@ -66,9 +66,6 @@ export const Grid2dWorldAutomataPage: React.FC<GridWorld2dAutomataPageProps> = (
             ])}
             onRedo={useCallback(() => setWorld((w) => w.history.redo()!), [
               setWorld,
-            ])}
-            onSettings={useCallback(() => setSettingsOpen((open) => !open), [
-              setSettingsOpen,
             ])}
           />
         </div>

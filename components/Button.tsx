@@ -27,6 +27,7 @@ export const Button: React.FC<
     <button
       type="button"
       className={classNames(
+        "select-none",
         buttonClassName,
         props.disabled ? disabledClassName : enabledClassName
       )}
