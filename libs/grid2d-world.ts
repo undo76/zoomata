@@ -82,6 +82,12 @@ export class Grid2dWorld {
     if (y < 0) y = h + y;
     return (y % h) * w + (x % w);
   }
+
+  forEach(fn: (cell: Cell2d) => void) {
+    for (const cell of this.iterate()) {
+      fn(cell);
+    }
+  }
 }
 
 export class MutableGrid2dWorld extends Grid2dWorld {
@@ -132,10 +138,10 @@ class UndoHistory<T> {
   }
 }
 
-export function cellRule(cellRule: CellRule2d) {
+export function cellRule(cellRuleFn: CellRule2d) {
   return function (current: Grid2dWorld, draft: MutableGrid2dWorld) {
-    for (let cell of current.iterate()) {
-      draft.setCellState(cell, cellRule(current, cell));
-    }
+    current.forEach((cell) =>
+      draft.setCellState(cell, cellRuleFn(current, cell))
+    );
   };
 }
