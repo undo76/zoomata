@@ -21,14 +21,10 @@ const singleDotInitFn = (w: MutableGrid2dWorld) =>
   w.setCellState([Math.floor(w.width / 2), Math.floor(w.height / 2)], 2);
 
 export default function Gallery() {
-  const [wolframRule] = useAnimatedRandomValue(256, 30, 1000);
-
   return (
     <PageLayout title="Gallery">
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <Widget title="Wolfram 1D" href="/wolfram">
-          <WolframAutomata rule={wolframRule} width={51} steps={51} />
-        </Widget>
+        <AnimatedWolframAutomataWidget initialRule={30} delay={1000} />
 
         <AnimatedGridWorld2Widget
           title="Replicating"
@@ -100,11 +96,28 @@ const AnimatedGridWorld2Widget: React.FC<{
   initialState: Grid2dWorld | (() => Grid2dWorld);
   colorMapping: ColorMap;
   delay: number;
-}> = ({ title, href, initialState, colorMapping, delay }) => {
+}> = React.memo(({ title, href, initialState, colorMapping, delay }) => {
   const [world] = useAnimatedIterable(initialState, delay);
   return (
     <Widget title={title} href={href}>
       <Grid2dWorldAutomata world={world} colorMapping={colorMapping} />
+    </Widget>
+  );
+});
+
+const AnimatedWolframAutomataWidget = (props: {
+  initialRule: number;
+  delay: number;
+}) => {
+  const [wolframRule] = useAnimatedRandomValue(
+    256,
+    props.initialRule,
+    props.delay
+  );
+
+  return (
+    <Widget title="Wolfram 1D" href="/wolfram">
+      <WolframAutomata rule={wolframRule} width={51} steps={51} />
     </Widget>
   );
 };
