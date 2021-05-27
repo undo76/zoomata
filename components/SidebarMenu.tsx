@@ -31,7 +31,7 @@ export const SidebarMenu: React.FC<SidebarMenuProps> = ({
           <div className="w-8 h-8">
             <LogoIcon />
           </div>
-          <h1 className="ml-4 text-3xl text-yellow-300 font-light uppercase">
+          <h1 className="ml-4 text-3xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-purple-500 font-light uppercase">
             Zoomata
           </h1>
         </div>

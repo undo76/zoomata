@@ -59,9 +59,14 @@ export const PageLayout: React.FC<PageLayoutProps> = ({
               <span className="sr-only">Open sidebar</span>
               <MenuIcon className="h-6 w-6" aria-hidden="true" />
             </button>
-            <h1 className="flex items-center ml-1 text-3xl text-yellow-300 font-light uppercase">
+            <h1 className="flex items-center ml-1 ">
               <LogoIcon className="h-6 w-6 mr-[2px]" aria-hidden="true" />
-              <span aria-hidden>oomata</span>
+              <span
+                aria-hidden
+                className="text-3xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 to-purple-500 font-light uppercase"
+              >
+                oomata
+              </span>
               <span className="sr-only">Zoomata</span>
             </h1>
           </div>
