@@ -71,3 +71,6 @@ export function stringToPatch(
 export function mod(a: number, b: number): number {
   return ((a % b) + b) % b;
 }
+
+export const singleDotInitFn = (w: MutableGrid2dWorld) =>
+  w.setCellState([Math.floor(w.width / 2), Math.floor(w.height / 2)], 2);

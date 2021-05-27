@@ -5,7 +5,11 @@ import {
   useAnimatedRandomValue,
 } from "../libs/use-animated";
 import { gameOfLifeRule } from "./game-of-life";
-import { drawCircleInWorld, randomizeWorld } from "../libs/utils";
+import {
+  drawCircleInWorld,
+  randomizeWorld,
+  singleDotInitFn,
+} from "../libs/utils";
 import { selfReproducingRule } from "./self-replicating";
 import React from "react";
 import { Grid2dWorldAutomata } from "../components/Grid2dWorldAutomata";
@@ -16,9 +20,6 @@ import { langtonAntRule } from "./langton-ant";
 
 const circleInitFn = (w: MutableGrid2dWorld) =>
   drawCircleInWorld(w, [25, 25], 3);
-
-const singleDotInitFn = (w: MutableGrid2dWorld) =>
-  w.setCellState([Math.floor(w.width / 2), Math.floor(w.height / 2)], 2);
 
 export default function Gallery() {
   return (
