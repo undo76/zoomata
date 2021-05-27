@@ -1,0 +1,33 @@
+import { Button } from '../components/Button'
+import { randomizeWorld } from '../libs/utils'
+import { Grid2dWorldAutomataPage } from '../components/Grid2dWorldAutomataPage'
+import { gameOfLifeRule } from './game-of-life'
+
+# Prueba de MDX
+
+Aqui va un parrafo
+Aqui va un parrafo
+Aqui va un parrafo
+Aqui va un parrafo
+Aqui va un parrafo
+Aqui va un parrafo
+
+  - lista
+  - lista
+  - lista
+  - <Button>Add more</Button>
+
+## lista numerada
+
+<div class="uppercase">
+1. Un **elemento**
+2. Dos <Button>Un boton</Button>
+</div>
+
+<div className="prose-off">
+<Grid2dWorldAutomataPage
+title="Game of life"
+initFn={randomizeWorld}
+rule={gameOfLifeRule}
+/>
+</div>
