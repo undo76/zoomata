@@ -82,7 +82,7 @@ let Widget: React.FC<{
         href={href}
         className="relative block bg-white p-1 rounded shadow transition transform scale-100 hover:shadow-lg hover:scale-[1.03]"
       >
-        <div className="absolute top-2 -left-1 p-0.5 px-2 text-gray-500 bg-gray-100 font-medium uppercase rounded-sm shadow">
+        <div className="absolute top-2 -left-1 p-0.5 px-2 text-gray-700 bg-gray-100 font-medium uppercase rounded-sm shadow">
           {title}
         </div>
         {children}
