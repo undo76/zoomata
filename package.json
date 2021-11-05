@@ -1,7 +1,7 @@
 {
   "name": "automata",
   "version": "0.0.1",
-  "description": "Cellular automata",
+  "description": "Cellular automata zoo",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
@@ -11,17 +11,19 @@
   "dependencies": {
     "@headlessui/react": "^1.1.1",
     "@heroicons/react": "^1.0.1",
-    "next": "^10.2.0",
+    "next": "^12.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.3.2",
+    "@tailwindcss/forms": "^0.3.4",
     "@types/react": "^17.0.4",
     "autoprefixer": "^10.2.5",
+    "eslint": "<8.0.0",
+    "eslint-config-next": "12.0.3",
     "postcss": "^8.2.13",
     "prettier": "^2.3.0",
-    "tailwindcss": "^2.1.2",
-    "typescript": "^4.3.0-beta"
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.4.4"
   }
 }
